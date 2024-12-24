@@ -1,23 +1,23 @@
 import {useParams} from "react-router-dom";
-import {getQuestionService} from "../services/question";
+import {getQuestionnaireService} from "../services/questionnaire";
 import {useRequest} from "ahooks";
 
-function useLoadQuestionData() {
+function useLoadQuestionnaireData() {
     const {id=""} = useParams()
     // const [loading, setLoading] = useState(true)
-    // const [questionData, setQuestionData] = useState({})
+    // const [questionnaireData, setQuestionnaireData] = useState({})
     //
     // useEffect(() => {
     //     async function fn() {
-    //         const data = await getQuestionService(id)
-    //         setQuestionData(data)
+    //         const data = await getQuestionnaireService(id)
+    //         setQuestionnaireData(data)
     //         setLoading(false)
     //     }
     //     fn()
     // }, []);
 
     async function load() {
-        const data = await getQuestionService(id)
+        const data = await getQuestionnaireService(id)
         return data
     }
 
@@ -26,4 +26,4 @@ function useLoadQuestionData() {
     return {loading, data, error}
 }
 
-export default useLoadQuestionData
+export default useLoadQuestionnaireData

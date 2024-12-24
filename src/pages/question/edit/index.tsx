@@ -1,8 +1,8 @@
 import React from "react";
-import useLoadQuestionData from "../../../hook/useLoadQuestionData";
+import useLoadQuestionnaireData from "../../../hook/useLoadQuestionnaireData";
 
 export const Edit: React.FC = () => {
-    const {loading, data} = useLoadQuestionData()
+    const {loading, data} = useLoadQuestionnaireData()
 
     return (<div>
         <p>Edit Page</p>

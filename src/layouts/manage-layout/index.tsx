@@ -4,7 +4,7 @@ import {DeleteOutlined, PlusOutlined, StarOutlined, UnorderedListOutlined} from 
 import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
 import {Content} from "antd/es/layout/layout";
-import {createQuestionService} from "../../services/question";
+import {createQuestionnaireService} from "../../services/questionnaire";
 import {useRequest} from "ahooks";
 
 const SurveyManage:React.FC = () => {
@@ -13,22 +13,22 @@ const SurveyManage:React.FC = () => {
     // const [loading, setLoading] = useState(false)
     // async function handleCreateClick() {
     //     setLoading(true)
-    //     const data = await createQuestionService()
+    //     const data = await createQuestionnaireService()
     //     setLoading(false)
     //     const {id} = data || {}
     //     if (id){
-    //         nav(`/question/edit/${id}`)
+    //         nav(`/questionnaire/edit/${id}`)
     //         message.success("问卷创建成功")
     //     }
     // }
 
-    const {loading, run: handleCreateClick} = useRequest(createQuestionService, {
+    const {loading, run: handleCreateClick} = useRequest(createQuestionnaireService, {
         manual: true,
         onSuccess: (data) => {
             if (data) {
                 const {id} = data || {}
                 if (id) {
-                    nav(`/question/edit/${id}`)
+                    nav(`/questionnaire/edit/${id}`)
                     message.success("问卷创建成功")
                 }
             }

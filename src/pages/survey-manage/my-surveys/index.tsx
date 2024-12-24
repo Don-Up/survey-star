@@ -12,7 +12,7 @@ import { useImmer } from "use-immer";
 import "antd/dist/reset.css";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import ListSearch from "../../../components/ListSearch";
-import {getQuestionListService} from "../../../services/question";
+import {getQuestionnaireListService} from "../../../services/questionnaire";
 import {useRequest} from "ahooks";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
@@ -49,7 +49,7 @@ const MySurveys: React.FC = () => {
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
     const [currentSurveyId, setCurrentSurveyId] = useState<number | null>(null); // 当前要删除的问卷 ID
 
-    const {data, loading} = useRequest(getQuestionListService)
+    const {data, loading} = useRequest(getQuestionnaireListService)
     // @ts-ignore
     const {list = [], total = 0 } = data
 
