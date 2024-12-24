@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {Button, Divider, Empty, Tag} from "antd";
+import React, {useEffect, useState} from "react";
+import {Button, Divider, Empty, Spin, Tag} from "antd";
 import {
     EditOutlined,
     BarChartOutlined,
@@ -11,6 +11,11 @@ import {
 import { useImmer } from "use-immer";
 import "antd/dist/reset.css";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import ListSearch from "../../../components/ListSearch";
+import {getQuestionListService} from "../../../services/question";
+import {useRequest} from "ahooks";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 interface Survey {
     id: number;
@@ -43,6 +48,10 @@ const MySurveys: React.FC = () => {
 
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
     const [currentSurveyId, setCurrentSurveyId] = useState<number | null>(null); // 当前要删除的问卷 ID
+
+    const {data, loading} = useRequest(getQuestionListService)
+    // @ts-ignore
+    const {list = [], total = 0 } = data
 
     // 打开确认对话框
     const showConfirmDialog = (id: number) => {
@@ -92,11 +101,14 @@ const MySurveys: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg h-screen">
-            <h1 className="text-xl font-bold mb-6">问卷列表</h1>
-
+            <div className={"flex justify-between"}>
+                <h1 className="text-xl font-bold mb-6">问卷列表</h1>
+                <ListSearch/>
+            </div>
             {/* 问卷列表 */}
             <div className="space-y-6">
-                {surveys.length === 0 && <Empty description={"暂无数据"}/> }
+                {loading && <div className={"text-center"}><Spin/></div>}
+                {!loading && surveys.length === 0 && <Empty description={"暂无数据"}/> }
                 {surveys.length > 0 && surveys.map((survey) => (
                     <div key={survey.id} className="p-4 border rounded-lg hover:shadow">
                         {/* 上部分 */}

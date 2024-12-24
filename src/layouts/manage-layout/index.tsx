@@ -1,11 +1,40 @@
-import React from "react";
-import {Button, Layout, Menu} from "antd";
+import React, {useState} from "react";
+import {Button, Layout, Menu, message} from "antd";
 import {DeleteOutlined, PlusOutlined, StarOutlined, UnorderedListOutlined} from "@ant-design/icons";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
 import {Content} from "antd/es/layout/layout";
+import {createQuestionService} from "../../services/question";
+import {useRequest} from "ahooks";
 
 const SurveyManage:React.FC = () => {
+    const nav = useNavigate()
+    const {pathname} = useLocation()
+    // const [loading, setLoading] = useState(false)
+    // async function handleCreateClick() {
+    //     setLoading(true)
+    //     const data = await createQuestionService()
+    //     setLoading(false)
+    //     const {id} = data || {}
+    //     if (id){
+    //         nav(`/question/edit/${id}`)
+    //         message.success("问卷创建成功")
+    //     }
+    // }
+
+    const {loading, run: handleCreateClick} = useRequest(createQuestionService, {
+        manual: true,
+        onSuccess: (data) => {
+            if (data) {
+                const {id} = data || {}
+                if (id) {
+                    nav(`/question/edit/${id}`)
+                    message.success("问卷创建成功")
+                }
+            }
+        },
+    })
+
     return  <Layout>
         {/* Sider */}
         <Sider width={200} style={{ backgroundColor: "#f0f2f5", padding: "16px" }}>
@@ -15,6 +44,8 @@ const SurveyManage:React.FC = () => {
                 icon={<PlusOutlined />}
                 block
                 style={{ marginBottom: "16px" }}
+                onClick={handleCreateClick}
+                disabled={loading}
             >
                 新建问卷
             </Button>
