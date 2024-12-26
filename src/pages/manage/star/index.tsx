@@ -91,11 +91,11 @@ const Star: React.FC = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg h-screen">
+        <div className="mx-auto py-6 px-6 bg-white shadow-md rounded-lg h-full">
             <h1 className="text-xl font-bold mb-6">问卷列表</h1>
 
             {/* 问卷列表 */}
-            <div className="space-y-6">
+            <div className="space-y-6 w-[50vw] min-w-[500px]">
                 {surveys.length === 0 && <Empty description={"暂无数据"}/> }
                 {surveys.length > 0 && surveys.map((survey) => (
                     <div key={survey.id} className="p-4 border rounded-lg hover:shadow">

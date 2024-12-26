@@ -4,11 +4,12 @@ import {Outlet} from "react-router-dom";
 import {Layout} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import styles from "./index.module.css"
+import Logo from "../../components/Logo";
 
 const MainLayout: React.FC = () => {
     return (<Layout>
         <Header className={styles.header}>
-            <div>Logo</div>
+            <Logo/>
             <div className={"ml-auto"}>Login</div>
         </Header>
         <Content className={styles.content}>

@@ -100,7 +100,7 @@ const List: React.FC = () => {
     };
 
     return (
-        <div className="mx-auto p-6 bg-white shadow-md rounded-lg h-screen">
+        <div className="mx-auto p-6 bg-white shadow-md rounded-lg h-full">
             <div className={"flex justify-between"}>
                 <h1 className="text-xl font-bold mb-6">Questionnaire List</h1>
                 <ListSearch/>

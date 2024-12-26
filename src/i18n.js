@@ -9,12 +9,14 @@ i18n
             en: {
                 translation: {
                     enter_keywords: "Enter keywords",
+                    xm_questionnaire: "XM Questionnaire",
                     // Add more translations here
                 }
             },
             cn: {
                 translation: {
                     enter_keywords: "输入关键字",
+                    xm_questionnaire: "小木问卷",
                     // Add more translations here
                 }
             },

@@ -94,7 +94,7 @@ const Trash: React.FC = () => {
     ];
 
     return (
-        <div className="p-6 bg-white shadow-md rounded-lg h-screen">
+        <div className="p-6 bg-white shadow-md rounded-lg h-full">
             {/* 标题和操作按钮 */}
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-xl font-bold">回收站</h1>

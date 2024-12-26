@@ -5,7 +5,7 @@ import {RouterProvider} from "react-router-dom";
 import router from "./router"; // Import normalize.css first
 
 function App() {
-    useTitle("surveys")
+    useTitle("questionnaire")
 
     return (
         <RouterProvider router={router}></RouterProvider>
