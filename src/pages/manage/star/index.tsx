@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Button, Divider, Empty, Spin, Tag} from "antd";
+import React, { useState } from "react";
+import {Button, Divider, Empty, Tag} from "antd";
 import {
     EditOutlined,
     BarChartOutlined,
@@ -11,11 +11,6 @@ import {
 import { useImmer } from "use-immer";
 import "antd/dist/reset.css";
 import ConfirmDialog from "../../components/ConfirmDialog";
-import ListSearch from "../../../components/ListSearch";
-import {getQuestionnaireListService} from "../../../services/questionnaire";
-import {useRequest} from "ahooks";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 
 interface Survey {
     id: number;
@@ -26,32 +21,28 @@ interface Survey {
     date: string;
 }
 
-const MySurveys: React.FC = () => {
+const Star: React.FC = () => {
     const [surveys, updateSurveys] = useImmer<Survey[]>([
-        // {
-        //     id: 1,
-        //     title: "问卷1",
-        //     status: "未发布",
-        //     marked: false,
-        //     answers: 5,
-        //     date: "3月10日 13:23",
-        // },
-        // {
-        //     id: 2,
-        //     title: "问卷2",
-        //     status: "已发布",
-        //     marked: true,
-        //     answers: 3,
-        //     date: "3月11日 13:23",
-        // },
+        {
+            id: 1,
+            title: "问卷1",
+            status: "未发布",
+            marked: false,
+            answers: 5,
+            date: "3月10日 13:23",
+        },
+        {
+            id: 2,
+            title: "问卷2",
+            status: "已发布",
+            marked: true,
+            answers: 3,
+            date: "3月11日 13:23",
+        },
     ]);
 
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
     const [currentSurveyId, setCurrentSurveyId] = useState<number | null>(null); // 当前要删除的问卷 ID
-
-    const {data, loading} = useRequest(getQuestionnaireListService)
-    // @ts-ignore
-    const {list = [], total = 0 } = data
 
     // 打开确认对话框
     const showConfirmDialog = (id: number) => {
@@ -101,14 +92,11 @@ const MySurveys: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg h-screen">
-            <div className={"flex justify-between"}>
-                <h1 className="text-xl font-bold mb-6">问卷列表</h1>
-                <ListSearch/>
-            </div>
+            <h1 className="text-xl font-bold mb-6">问卷列表</h1>
+
             {/* 问卷列表 */}
             <div className="space-y-6">
-                {loading && <div className={"text-center"}><Spin/></div>}
-                {!loading && surveys.length === 0 && <Empty description={"暂无数据"}/> }
+                {surveys.length === 0 && <Empty description={"暂无数据"}/> }
                 {surveys.length > 0 && surveys.map((survey) => (
                     <div key={survey.id} className="p-4 border rounded-lg hover:shadow">
                         {/* 上部分 */}
@@ -201,4 +189,4 @@ const MySurveys: React.FC = () => {
     );
 };
 
-export default MySurveys;
+export default Star;

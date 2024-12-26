@@ -4,7 +4,9 @@ import axios from "axios";
 type SearchOptions = {
     // page: number,
     // pageSize: number,
-    keyword?: string
+    keyword?: string,
+    isStar?: boolean,
+    isDeleted?: boolean
 }
 
 /**

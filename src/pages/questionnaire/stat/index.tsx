@@ -1,5 +1,5 @@
 import React from "react";
-import useLoadQuestionnaireData from "../../../hook/useLoadQuestionnaireData";
+import useLoadQuestionnaireData from "../../../hook/useLoadQuestionData";
 
 const Stat: React.FC = () => {
     const {loading, data} = useLoadQuestionnaireData()

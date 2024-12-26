@@ -10,7 +10,7 @@ interface Survey {
     date: string;
 }
 
-const RecycleBin: React.FC = () => {
+const Trash: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>(""); // 搜索关键词
     const [data, setData] = useState<Survey[]>([
         {
@@ -151,4 +151,4 @@ const RecycleBin: React.FC = () => {
     );
 };
 
-export default RecycleBin;
+export default Trash;

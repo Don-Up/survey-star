@@ -1,7 +1,6 @@
-/* index.module.css */
-@tailwind base;       /* 包含基础样式 */
-/*@tailwind layouts; !* 包含组件样式 *!*/
-@tailwind utilities;  /* 包含工具类 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;

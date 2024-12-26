@@ -6,21 +6,11 @@ import Sider from "antd/es/layout/Sider";
 import {Content} from "antd/es/layout/layout";
 import {createQuestionnaireService} from "../../services/questionnaire";
 import {useRequest} from "ahooks";
+import {calc} from "antd/es/theme/internal";
 
 const SurveyManage:React.FC = () => {
     const nav = useNavigate()
     const {pathname} = useLocation()
-    // const [loading, setLoading] = useState(false)
-    // async function handleCreateClick() {
-    //     setLoading(true)
-    //     const data = await createQuestionnaireService()
-    //     setLoading(false)
-    //     const {id} = data || {}
-    //     if (id){
-    //         nav(`/questionnaire/edit/${id}`)
-    //         message.success("问卷创建成功")
-    //     }
-    // }
 
     const {loading, run: handleCreateClick} = useRequest(createQuestionnaireService, {
         manual: true,
@@ -29,7 +19,7 @@ const SurveyManage:React.FC = () => {
                 const {id} = data || {}
                 if (id) {
                     nav(`/questionnaire/edit/${id}`)
-                    message.success("问卷创建成功")
+                    message.success("Questionnaire created successfully")
                 }
             }
         },
@@ -37,17 +27,18 @@ const SurveyManage:React.FC = () => {
 
     return  <Layout>
         {/* Sider */}
-        <Sider width={200} style={{ backgroundColor: "#f0f2f5", padding: "16px" }}>
+        <Sider width={250} style={{ backgroundColor: "#f0f2f5", padding: "16px" }}>
             {/* 新建问卷按钮 */}
             <Button
                 type="primary"
                 icon={<PlusOutlined />}
                 block
-                style={{ marginBottom: "16px" }}
+                className={"mb-4"}
                 onClick={handleCreateClick}
                 disabled={loading}
+                size={"large"}
             >
-                新建问卷
+                New Questionnaire
             </Button>
             {/* 菜单 */}
             <Menu
@@ -57,22 +48,22 @@ const SurveyManage:React.FC = () => {
                     {
                         key: "/manage/list",
                         icon: <UnorderedListOutlined />,
-                        label: <Link to="/manage/list">我的问卷</Link>,
+                        label: <Link to="/manage/list">My Questionnaire</Link>,
                     },
                     {
                         key: "/manage/star",
                         icon: <StarOutlined />,
-                        label: <Link to="/manage/star">星标问卷</Link>,
+                        label: <Link to="/manage/star">Starred Questionnaire</Link>,
                     },
                     {
                         key: "/manage/trash",
                         icon: <DeleteOutlined />,
-                        label: <Link to="/manage/trash">回收站</Link>,
+                        label: <Link to="/manage/trash">Recycle bin</Link>,
                     },
                 ]}
             />
         </Sider>
-        <Content>
+        <Content style={{width: "calc(100vw - 250px)"}}>
             <Outlet/>
         </Content>
     </Layout>

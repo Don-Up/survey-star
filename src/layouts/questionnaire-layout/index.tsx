@@ -1,11 +1,11 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
 
-const SurveyLayout:React.FC = () => {
+const QuestionnaireLayout:React.FC = () => {
   return (<div>
-      SurveyLayout
+      QuestionnaireLayout
       <Outlet/>
   </div>)
 }
 
-export default SurveyLayout
+export default QuestionnaireLayout

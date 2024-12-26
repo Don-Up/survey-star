@@ -1,17 +1,17 @@
 import React from "react";
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../layouts/main-layout";
-import Index from "../pages/home";
+import Home from "../pages/home";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import NotFound from "../pages/404";
 import ManageLayout from "../layouts/manage-layout";
-import MySurveys from "../pages/survey-manage/my-surveys";
-import StarSurveys from "../pages/survey-manage/star-surveys";
-import RecycleBin from "../pages/survey-manage/recycle-bin";
-import SurveyLayout from "../layouts/survey-layout";
-import EditSurveys from "../pages/survey-details/edit-surveys";
-import StatSurveys from "../pages/survey-details/stat-surveys";
+import List from "../pages/manage/list";
+import Star from "../pages/manage/star";
+import Trash from "../pages/manage/trash";
+import QuestionnaireLayout from "../layouts/questionnaire-layout";
+import {Edit} from "../pages/questionnaire/edit";
+import Stat from "../pages/questionnaire/stat";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Index/>
+                element: <Home/>
             },
             {
                 path: "login",
@@ -38,29 +38,29 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "list",
-                element: <MySurveys/>
+                element: <List/>
             },
             {
                 path: "star",
-                element: <StarSurveys/>
+                element: <Star/>
             },
             {
                 path: "trash",
-                element: <RecycleBin/>
+                element: <Trash/>
             }
         ]
     },
     {
-        path: "/survey",
-        element: <SurveyLayout/>,
+        path: "/questionnaire",
+        element: <QuestionnaireLayout/>,
         children: [
             {
-                path: "edit:id",
-                element: <EditSurveys/>
+                path: "edit/:id",
+                element: <Edit/>
             },
             {
-                path: "stat:id",
-                element: <StatSurveys/>
+                path: "stat/:id",
+                element: <Stat/>
             }
         ]
     },
