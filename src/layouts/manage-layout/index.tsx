@@ -8,6 +8,7 @@ import Logo from "../../components/Logo";
 import Title from "antd/es/skeleton/Title";
 import {calc} from "antd/es/theme/internal";
 import styles from "../main-layout/index.module.css";
+import UserInfo from "../../components/UserInfo";
 
 const { Header, Footer, Content,
     Sider } = Layout;
@@ -18,9 +19,9 @@ const SurveyManage:React.FC = () => {
 
     const {loading, run: handleCreateClick} = useRequest(createQuestionnaireService, {
         manual: true,
-        onSuccess: (data) => {
-            if (data) {
-                const {id} = data || {}
+        onSuccess: (res) => {
+            if (res) {
+                const {id} = res.data.data || {}
                 if (id) {
                     nav(`/questionnaire/edit/${id}`)
                     message.success("Questionnaire created successfully")
@@ -31,7 +32,10 @@ const SurveyManage:React.FC = () => {
 
     return  <Layout>
         <Header>
-            <Logo/>
+            <div className={"flex"}>
+                <Logo/>
+                <UserInfo className={"ml-auto"}/>
+            </div>
         </Header>
         <Layout style={{height: "calc(100vh - 64px*2)"}}>
             <Sider width={250} style={{ backgroundColor: "#f0f2f5", padding: "16px" }}>

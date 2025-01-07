@@ -10,6 +10,7 @@ i18n
                 translation: {
                     enter_keywords: "Enter keywords",
                     xm_questionnaire: "XM Questionnaire",
+                    login: "Login",
                     // Add more translations here
                 }
             },
@@ -17,6 +18,7 @@ i18n
                 translation: {
                     enter_keywords: "输入关键字",
                     xm_questionnaire: "小木问卷",
+                    login: "登录",
                     // Add more translations here
                 }
             },

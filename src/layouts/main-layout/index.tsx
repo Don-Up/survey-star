@@ -5,6 +5,7 @@ import {Layout} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import styles from "./index.module.css"
 import Logo from "../../components/Logo";
+import UserInfo from "../../components/UserInfo";
 
 const MainLayout: React.FC = () => {
     return (<Layout>
@@ -15,7 +16,7 @@ const MainLayout: React.FC = () => {
         <Content className={styles.content}>
             <Outlet/>
         </Content>
-        <Footer className={styles.footer}>XiaoMu Questionnaire &copy;2023 - present. Created By Me</Footer>
+        <Footer className={styles.footer}>XM Questionnaire &copy;2023 - present. Created By Me</Footer>
     </Layout>)
 };
 

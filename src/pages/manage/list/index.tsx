@@ -14,6 +14,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import ListSearch from "../../../components/ListSearch";
 import {getQuestionnaireListService} from "../../../services/questionnaire";
 import {useRequest} from "ahooks";
+import {useNavigate, useRoutes} from "react-router-dom";
 
 interface Survey {
     id: number;
@@ -29,23 +30,33 @@ const List: React.FC = () => {
     // const [searchParams] = useSearchParams()
     // console.log("keyword", searchParams.get("keyword"))
 
+    const nav = useNavigate()
+
+    function handleEdit(id: number) {
+        nav(`/questionnaire/edit/${id}`)
+    }
+
+    function handleStat(id: number) {
+        nav(`/questionnaire/stat/${id}`)
+    }
+
     const [surveys, updateSurveys] = useImmer<Survey[]>([
-        // {
-        //     id: 1,
-        //     title: "问卷1",
-        //     status: "未发布",
-        //     marked: false,
-        //     answers: 5,
-        //     date: "3月10日 13:23",
-        // },
-        // {
-        //     id: 2,
-        //     title: "问卷2",
-        //     status: "已发布",
-        //     marked: true,
-        //     answers: 3,
-        //     date: "3月11日 13:23",
-        // },
+        {
+            id: 1,
+            title: "问卷1",
+            status: "未发布",
+            marked: false,
+            answers: 5,
+            date: "3月10日 13:23",
+        },
+        {
+            id: 2,
+            title: "问卷2",
+            status: "已发布",
+            marked: true,
+            answers: 3,
+            date: "3月11日 13:23",
+        },
     ]);
 
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
@@ -142,6 +153,7 @@ const List: React.FC = () => {
                                     icon={<EditOutlined />}
                                     size="small"
                                     className="text-gray-500"
+                                    onClick={() => handleEdit(survey.id)}
                                 >
                                     编辑问卷
                                 </Button>
@@ -150,6 +162,7 @@ const List: React.FC = () => {
                                     icon={<BarChartOutlined />}
                                     size="small"
                                     className="text-gray-500"
+                                    onClick={() => handleStat(survey.id)}
                                 >
                                     问卷统计
                                 </Button>

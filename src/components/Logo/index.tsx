@@ -12,10 +12,10 @@ const Logo:React.FC = () => {
   return (<div>
       <Link to={"/"}>
           <Space direction={"horizontal"}>
-              <Title level={2}>
+              <Title level={3}>
                   <FormOutlined/>
               </Title>
-              <Title level={2}>{t("xm_questionnaire")}</Title>
+              <Title level={3}>{t("xm_questionnaire")}</Title>
           </Space>
       </Link>
   </div>)
