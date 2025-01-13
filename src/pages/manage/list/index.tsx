@@ -4,38 +4,24 @@ import {useImmer} from "use-immer";
 import "antd/dist/reset.css";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import ListSearch from "../../../components/ListSearch";
-import {getQuestionnaireListService} from "../../../services/questionnaire";
-import {useRequest} from "ahooks";
-import {LIST_SEARCH_PARAM_KEY, QUESTIONNAIRE_LIST} from "../../../constant";
 import ListItem from "../../components/ListItem";
-
-interface Survey {
-    id: number;
-    title: string;
-    status: "已发布" | "未发布";
-    marked: boolean;
-    answers: number;
-    date: string;
-}
+import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
 
 /*
  * Questionnaire List
  */
 const List: React.FC = () => {
-    // const [searchParams] = useSearchParams()
-    // console.log("keyword", searchParams.get("keyword"))
-
     const [surveys, updateSurveys] = useImmer<any[]>([]);
+    const [total, setTotal] = useState(0)
 
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
     const [currentSurveyId, setCurrentSurveyId] = useState<string | null>(null); // 当前要删除的问卷 ID
 
-    const {loading} = useRequest(getQuestionnaireListService, {
-        onSuccess: (data) => {
-            updateSurveys((draft) => {draft.push(...data.data.data.list)})
-            // updateSurveys((draft) => {draft.push(...QUESTIONNAIRE_LIST)})
-            console.log("surveys", surveys.length)
-        }
+    const { loading } = useLoadQuestionnaireListData((list: [], total: number) => {
+        updateSurveys((draft) => {
+            draft.push(...list)
+        })
+        setTotal(total)
     })
 
     // 打开确认对话框
@@ -68,11 +54,12 @@ const List: React.FC = () => {
             <div className={"flex justify-between"}>
                 <h1 className="text-xl font-bold mb-6">Questionnaire List</h1>
                 <ListSearch/>
+                {total}
             </div>
             {/* 问卷列表 */}
             <div className="space-y-6">
                 {loading && <div className={"text-center"}><Spin/></div>}
-                {!loading && surveys.length === 0 && <Empty description={"No data available"}/> }
+                {!loading && surveys.length === 0 && <Empty description={"No data available"}/>}
                 {surveys.length > 0 && surveys.map((survey: any) => (
                     <ListItem survey={survey} showConfirmDialog={showConfirmDialog} updateSurveys={updateSurveys}/>
                 ))}

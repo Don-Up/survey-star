@@ -1,21 +1,18 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Layout, Menu, message} from "antd";
-import {DeleteOutlined, FormOutlined, PlusOutlined, StarOutlined, UnorderedListOutlined} from "@ant-design/icons";
+import {DeleteOutlined, PlusOutlined, StarOutlined, UnorderedListOutlined} from "@ant-design/icons";
 import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import {createQuestionnaireService} from "../../services/questionnaire";
 import {useRequest} from "ahooks";
 import Logo from "../../components/Logo";
-import Title from "antd/es/skeleton/Title";
-import {calc} from "antd/es/theme/internal";
 import styles from "../main-layout/index.module.css";
 import UserInfo from "../../components/UserInfo";
 
 const { Header, Footer, Content,
     Sider } = Layout;
 
-const SurveyManage:React.FC = () => {
+const ManageLayout: React.FC = () => {
     const nav = useNavigate()
-    const {pathname} = useLocation()
 
     const {loading, run: handleCreateClick} = useRequest(createQuestionnaireService, {
         manual: true,
@@ -82,4 +79,4 @@ const SurveyManage:React.FC = () => {
     </Layout>
 }
 
-export default SurveyManage
+export default ManageLayout

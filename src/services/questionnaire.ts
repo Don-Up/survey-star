@@ -34,10 +34,9 @@ export async function createQuestionnaireService()    {
 
 /*
  * Get the list of questionnaire
- *
  */
 export async function getQuestionnaireListService(opt: Partial<SearchOptions>)  {
     const url = "/api/questionnaire"
-    const data = (await axios.get(url) as ResDataType)
+    const data = (await axios.get(url, { params: opt }) as ResDataType)
     return data
 }

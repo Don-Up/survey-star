@@ -11,22 +11,22 @@ type OptionType = {
 /*
  * Load questionnaire list data
  */
-function useLoadQuestionnaireListData(opt: Partial<OptionType> = {}){
-
-    const {isStar = false, isDeleted = false} = opt
-
+function useLoadQuestionnaireListData(callback: (list: [], total: number) => void, opt: Partial<OptionType> = {}){
     const [searchParams] = useSearchParams()
-    console.log("keyword", searchParams.get("keyword"))
+    const {isStar, isDeleted} = opt
 
-    const {data, loading, error} = useRequest(async () => {
+    const {loading} = useRequest(async () => {
         const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ""
-        const data = await getQuestionnaireListService({keyword, isStar, isDeleted})
-        return data
+        console.log("keyword", keyword)
+        return await getQuestionnaireListService({keyword, isStar, isDeleted})
     }, {
-        refreshDeps: [searchParams]
+        refreshDeps: [searchParams],
+        onSuccess: (data) => {
+            callback(data.data.data.list, data.data.data.total)
+        }
     })
 
-    return {data, loading, error}
+    return {loading}
 }
 
 export default useLoadQuestionnaireListData
