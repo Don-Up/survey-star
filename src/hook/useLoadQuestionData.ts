@@ -4,21 +4,8 @@ import {useRequest} from "ahooks";
 
 function useLoadQuestionnaireData() {
     const {id=""} = useParams()
-    // const [loading, setLoading] = useState(true)
-    // const [questionnaireData, setQuestionnaireData] = useState({})
-    //
-    // useEffect(() => {
-    //     async function fn() {
-    //         const data = await getQuestionnaireService(id)
-    //         setQuestionnaireData(data)
-    //         setLoading(false)
-    //     }
-    //     fn()
-    // }, []);
-
     async function load() {
-        const data = await getQuestionnaireService(id)
-        return data
+        return await getQuestionnaireService(id)
     }
 
     const {data, loading, error} = useRequest(load)

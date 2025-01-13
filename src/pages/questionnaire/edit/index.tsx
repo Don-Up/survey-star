@@ -1,25 +1,16 @@
-import React, {useEffect} from "react";
+import React from "react";
 import useLoadQuestionnaireData from "../../../hook/useLoadQuestionData";
-import {useParams} from "react-router-dom";
-import {getQuestionnaireService} from "../../../services/questionnaire";
 
+/*
+ * @description: Edit Questionnaire Page
+ * Click on ‘Edit Questionnaire’ in Questionnaire List's items to jump to this page.
+ */
 export const Edit: React.FC = () => {
-    // const {loading, data} = useLoadQuestionnaireData()
-    const {id=""} = useParams();
-    
-    useEffect(() => {
-        async function fn(){
-            const data = await getQuestionnaireService(id)
-            console.log("data", data)
-        }
-        fn()
-    }, [])
-    
+    const {loading, data} = useLoadQuestionnaireData()
     return (<div>
         <p>Edit Page</p>
         <div>
-            {/*{loading ? <p>loading</p> : <p>{JSON.stringify(data)}</p>}*/}
-            <p>{id}</p>
+            {loading ? <p>loading</p> : <p>{JSON.stringify(data)}</p>}
         </div>
     </div>)
 }
