@@ -6,6 +6,8 @@ import {getQuestionnaireListService} from "../services/questionnaire";
 type OptionType = {
     isStar: boolean
     isDeleted: boolean
+    page: number
+    pageSize: number
 }
 
 /*
@@ -17,12 +19,14 @@ function useLoadQuestionnaireListData(callback: (list: [], total: number) => voi
 
     const {loading} = useRequest(async () => {
         const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ""
-        console.log("keyword", keyword)
-        return await getQuestionnaireListService({keyword, isStar, isDeleted})
+        const page = parseInt(searchParams.get("page") || "1")
+        const pageSize = parseInt(searchParams.get("pageSize") || "10")
+        return await getQuestionnaireListService({keyword, isStar, isDeleted, page, pageSize})
     }, {
         refreshDeps: [searchParams],
         onSuccess: (data) => {
-            callback(data.data.data.list, data.data.data.total)
+            console.log("total ", data.data.data.pagination.total)
+            callback(data.data.data.list, data.data.data.pagination)
         }
     })
 

@@ -14,11 +14,11 @@ const Star: React.FC = () => {
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
     const [currentSurveyId, setCurrentSurveyId] = useState<string | null>(null); // 当前要删除的问卷 ID
 
-    const { loading } = useLoadQuestionnaireListData((list: [], total: number) => {
+    const { loading } = useLoadQuestionnaireListData((list: [], pagination: any) => {
         updateSurveys((draft) => {
             draft.push(...list)
         })
-        setTotal(total)
+        setTotal(pagination.total)
     }, { isStar: true })
 
     // 打开确认对话框

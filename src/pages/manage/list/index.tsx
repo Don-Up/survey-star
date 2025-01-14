@@ -6,6 +6,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import ListSearch from "../../../components/ListSearch";
 import ListItem from "../../components/ListItem";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
+import ListPagination from "../../../components/ListPagination";
 
 /*
  * Questionnaire List
@@ -17,11 +18,12 @@ const List: React.FC = () => {
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制对话框显示状态
     const [currentSurveyId, setCurrentSurveyId] = useState<string | null>(null); // 当前要删除的问卷 ID
 
-    const { loading } = useLoadQuestionnaireListData((list: [], total: number) => {
+    const { loading } = useLoadQuestionnaireListData((list: [], pagination: any) => {
         updateSurveys((draft) => {
+            draft.length = 0
             draft.push(...list)
         })
-        setTotal(total)
+        setTotal(pagination.total)
     })
 
     // 打开确认对话框
@@ -50,7 +52,7 @@ const List: React.FC = () => {
     };
 
     return (
-        <div className="mx-auto p-6 bg-white shadow-md rounded-lg h-full">
+        <div className="mx-auto p-6 bg-white shadow-md rounded-lg h-full overflow-y-auto">
             <div className={"flex justify-between"}>
                 <h1 className="text-xl font-bold mb-6">Questionnaire List</h1>
                 <ListSearch/>
@@ -63,6 +65,7 @@ const List: React.FC = () => {
                 {surveys.length > 0 && surveys.map((survey: any) => (
                     <ListItem survey={survey} showConfirmDialog={showConfirmDialog} updateSurveys={updateSurveys}/>
                 ))}
+                <ListPagination total={total}/>
             </div>
 
             {/* 确认对话框 */}

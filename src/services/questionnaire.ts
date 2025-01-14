@@ -7,6 +7,8 @@ type SearchOptions = {
     keyword?: string,
     isStar?: boolean,
     isDeleted?: boolean
+    page: number
+    pageSize: number
 }
 
 /**
@@ -37,6 +39,5 @@ export async function createQuestionnaireService()    {
  */
 export async function getQuestionnaireListService(opt: Partial<SearchOptions>)  {
     const url = "/api/questionnaire"
-    const data = (await axios.get(url, { params: opt }) as ResDataType)
-    return data
+    return (await axios.get(url, {params: opt}) as ResDataType)
 }
