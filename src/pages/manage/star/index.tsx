@@ -6,6 +6,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
 import ListSearch from "../../../components/ListSearch";
 import ListItem from "../../components/ListItem";
+import ListPagination from "../../../components/ListPagination";
 
 const Star: React.FC = () => {
     const [surveys, updateSurveys] = useImmer<any[]>([]);
@@ -16,6 +17,7 @@ const Star: React.FC = () => {
 
     const { loading } = useLoadQuestionnaireListData((list: [], pagination: any) => {
         updateSurveys((draft) => {
+            draft.length = 0
             draft.push(...list)
         })
         setTotal(pagination.total)
@@ -47,7 +49,7 @@ const Star: React.FC = () => {
     };
 
     return (
-        <div className="mx-auto p-6 bg-white shadow-md rounded-lg h-full">
+        <div className="mx-auto p-6 bg-white shadow-md rounded-lg h-full overflow-y-auto">
             <div className={"flex justify-between"}>
                 <h1 className="text-xl font-bold mb-6">Questionnaire List</h1>
                 <ListSearch/>
@@ -60,6 +62,7 @@ const Star: React.FC = () => {
                 {surveys.length > 0 && surveys.map((survey: any) => (
                     <ListItem survey={survey} showConfirmDialog={showConfirmDialog} updateSurveys={updateSurveys}/>
                 ))}
+                <ListPagination total={total}/>
             </div>
 
             {/* 确认对话框 */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Table, Tag, Input, Button, Modal } from "antd";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
 
 interface Survey {
     id: number;
@@ -12,37 +13,22 @@ interface Survey {
 
 const Trash: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>(""); // 搜索关键词
-    const [data, setData] = useState<Survey[]>([
-        {
-            id: 1,
-            title: "问卷1",
-            status: "未发布",
-            answers: 5,
-            date: "3月10日 13:23",
-        },
-        {
-            id: 2,
-            title: "问卷2",
-            status: "已发布",
-            answers: 3,
-            date: "3月11日 13:23",
-        },
-        {
-            id: 3,
-            title: "问卷3",
-            status: "未发布",
-            answers: 6,
-            date: "3月12日 13:23",
-        },
-    ]);
+    const [data, setData] = useState<any[]>();
+
+    const [total, setTotal] = useState(0)
+
+    const { loading } = useLoadQuestionnaireListData((list: [], pagination: any) => {
+        setData(list)
+        setTotal(pagination.total)
+    }, { isDeleted: true })
 
     const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]); // 选中的行
     const [isDialogVisible, setDialogVisible] = useState(false); // 控制确认对话框显示
 
     // 搜索过滤
-    const filteredData = data.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // const filteredData = data.filter((item) =>
+    //     item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
 
     // 处理选中行变化
     const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -56,7 +42,7 @@ const Trash: React.FC = () => {
 
     // 确认彻底删除
     const confirmDelete = () => {
-        setData((prevData) => prevData.filter((item) => !selectedRowKeys.includes(item.id))); // 删除选中行
+        // setData((prevData) => prevData.filter((item) => !selectedRowKeys.includes(item.id))); // 删除选中行
         setSelectedRowKeys([]); // 清空选中项
         setDialogVisible(false); // 关闭对话框
     };
@@ -75,10 +61,10 @@ const Trash: React.FC = () => {
         },
         {
             title: "是否发布",
-            dataIndex: "status",
-            key: "status",
-            render: (status: string) => (
-                <Tag color={status === "已发布" ? "blue" : "default"}>{status}</Tag>
+            dataIndex: "isPublished",
+            key: "isPublished",
+            render: (status: boolean) => (
+                <Tag color={status ? "blue" : "default"}>{status}</Tag>
             ),
         },
         {
@@ -88,8 +74,8 @@ const Trash: React.FC = () => {
         },
         {
             title: "创建时间",
-            dataIndex: "date",
-            key: "date",
+            dataIndex: "createdAt",
+            key: "createdAt",
         },
     ];
 
@@ -134,7 +120,7 @@ const Trash: React.FC = () => {
                     onChange: onSelectChange,
                 }}
                 columns={columns}
-                dataSource={filteredData}
+                dataSource={data}
                 rowKey="id"
                 pagination={{ pageSize: 5 }}
                 bordered
