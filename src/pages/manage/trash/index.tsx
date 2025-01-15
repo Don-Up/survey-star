@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Table, Tag, Input, Button, Modal } from "antd";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
-import {restoreDeletedQuestionnaireService} from "../../../services/questionnaire";
+import {deleteQuestionnaireService, restoreDeletedQuestionnaireService} from "../../../services/questionnaire";
 
 interface Survey {
     id: number;
@@ -43,9 +43,15 @@ const Trash: React.FC = () => {
 
     // 确认彻底删除
     const confirmDelete = () => {
-        // setData((prevData) => prevData.filter((item) => !selectedRowKeys.includes(item.id))); // 删除选中行
-        setSelectedRowKeys([]); // 清空选中项
-        setDialogVisible(false); // 关闭对话框
+        deleteQuestionnaireService(selectedRowKeys).then(res => {
+            if(res.errno === 0){
+                setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
+                setSelectedRowKeys([]); // 清空选中项
+                setDialogVisible(false); // 关闭对话框
+            } else {
+                console.log(res.msg)
+            }
+        })
     };
 
     // 关闭确认对话框

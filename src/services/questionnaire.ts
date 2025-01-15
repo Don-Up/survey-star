@@ -52,11 +52,14 @@ export async function copyQuestionnaireService(id: string) {
     return response.data; // 返回真正的业务数据部分
 }
 
-export async function deleteQuestionnaireService(id: string) {
-    const url = `/api/questionnaire/${id}`;
-    const response = await axios.delete(url);
+export async function deleteQuestionnaireService(ids: number[]) {
+    const url = `/api/questionnaire`;
+    const response = await axios.delete(url, {
+        data: { ids }, // 在 config.data 中传递 body 数据
+    });
     return response.data; // 返回真正的业务数据部分
 }
+
 
 /*
  * Get the list of questionnaire
