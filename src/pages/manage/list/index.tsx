@@ -7,6 +7,7 @@ import ListSearch from "../../../components/ListSearch";
 import ListItem from "../../components/ListItem";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
 import ListPagination from "../../../components/ListPagination";
+import {deleteQuestionnaireService, updateQuestionnaireService} from "../../../services/questionnaire";
 
 /*
  * Questionnaire List
@@ -35,12 +36,20 @@ const List: React.FC = () => {
     // 删除问卷
     const handleDelete = () => {
         if (currentSurveyId !== null) {
-            updateSurveys((draft) => {
-                const index = draft.findIndex((s) => s.id === currentSurveyId);
-                if (index !== -1) {
-                    draft.splice(index, 1);
+            updateQuestionnaireService(currentSurveyId, {isDeleted: true}).then(
+                (res) => {
+                    if(res.errno === 0){
+                        updateSurveys((draft) => {
+                            const index = draft.findIndex((s) => s.id === currentSurveyId);
+                            if (index !== -1) {
+                                draft.splice(index, 1);
+                            }
+                        });
+                    } else {
+                        console.log("delete questionnaire service error", res.code)
+                    }
                 }
-            });
+            )
         }
         closeConfirmDialog(); // 关闭对话框
     };

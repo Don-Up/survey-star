@@ -25,7 +25,6 @@ function useLoadQuestionnaireListData(callback: (list: [], total: number) => voi
     }, {
         refreshDeps: [searchParams],
         onSuccess: (data) => {
-            console.log("total ", data.data.data.pagination.total)
             callback(data.data.data.list, data.data.data.pagination)
         }
     })

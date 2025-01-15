@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Table, Tag, Input, Button, Modal } from "antd";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
+import {restoreDeletedQuestionnaireService} from "../../../services/questionnaire";
 
 interface Survey {
     id: number;
@@ -79,6 +80,17 @@ const Trash: React.FC = () => {
         },
     ];
 
+    function handleRestore() {
+        console.log("selectedRowKeys", selectedRowKeys)
+        restoreDeletedQuestionnaireService(selectedRowKeys).then(res => {
+            if(res.errno === 0){
+                setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
+            } else {
+                console.log(res.msg)
+            }
+        })
+    }
+
     return (
         <div className="p-6 bg-white shadow-md rounded-lg h-full">
             {/* 标题和操作按钮 */}
@@ -100,6 +112,7 @@ const Trash: React.FC = () => {
                 <Button
                     type="primary"
                     disabled={selectedRowKeys.length === 0} // 未选择时禁用
+                    onClick={handleRestore}
                 >
                     恢复
                 </Button>

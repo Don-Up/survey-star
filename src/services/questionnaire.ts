@@ -34,6 +34,30 @@ export async function createQuestionnaireService()    {
     // return data
 }
 
+export async function updateQuestionnaireService(id: string, data: any) {
+    const url = `/api/questionnaire/${id}`;
+    const response = await axios.patch(url, data);
+    return response.data; // 返回真正的业务数据部分
+}
+
+export async function restoreDeletedQuestionnaireService(ids: number[]){
+    const url = "/api/questionnaire/restore"
+    const response = await axios.post(url, { ids });
+    return response.data;
+}
+
+export async function copyQuestionnaireService(id: string) {
+    const url = `/api/questionnaire/duplicate/${id}`;
+    const response = await axios.post(url);
+    return response.data; // 返回真正的业务数据部分
+}
+
+export async function deleteQuestionnaireService(id: string) {
+    const url = `/api/questionnaire/${id}`;
+    const response = await axios.delete(url);
+    return response.data; // 返回真正的业务数据部分
+}
+
 /*
  * Get the list of questionnaire
  */

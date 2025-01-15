@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Button, Divider, Tag} from "antd";
+import {Button, Divider, Popconfirm, Tag} from "antd";
 import {
     BarChartOutlined,
     CopyOutlined,
@@ -9,6 +9,7 @@ import {
     StarOutlined
 } from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
+import {copyQuestionnaireService, updateQuestionnaireService} from "../../services/questionnaire";
 
 const ListItem: React.FC<{
     survey: any,
@@ -26,29 +27,40 @@ const ListItem: React.FC<{
         nav(`/questionnaire/stat/${id}`)
     }
 
-    useEffect(() => {
-        console.log("useEffect", survey)
-    }, [])
-
     // 复制问卷
     const handleCopy = (id: string) => {
-        updateSurveys((draft) => {
-            const survey = draft.find((s: any) => s.id === id);
-            if (survey) {
-                const newSurvey = {...survey, id: draft.length + 1, title: `${survey.title} (副本)`};
-                draft.push(newSurvey);
+        copyQuestionnaireService(id).then((res) => {
+            if (res.errno === 0) {
+                alert("copied")
+                updateSurveys((draft) => {
+                    const survey = draft.find((s: any) => s.id === id);
+                    if (survey) {
+                        const newSurvey = {...survey, id: draft.length + 1, title: `${survey.title} (副本)`};
+                        draft.push(newSurvey);
+                    }
+                });
+            } else {
+                console.log("copy questionnaire service error", res.code)
             }
-        });
+        })
     };
 
     // 标星问卷
     const handleMark = (id: string) => {
-        updateSurveys((draft) => {
-            const survey = draft.find((s: any) => s.id === id);
-            if (survey) {
-                survey.marked = !survey.marked;
+        updateQuestionnaireService(id, {isStar: !survey.isStar}).then((res) => {
+            if (res.errno === 0) {
+                updateSurveys((draft) => {
+                    const survey = draft.find((s: any) => s.id === id);
+                    if (survey) {
+                        survey.isStar = !survey.isStar;
+                    }
+                });
+            } else {
+                console.log("update questionnaire service error", res.code)
             }
-        });
+        }).catch((err) => {
+            console.log(err)
+        })
     };
 
     return (<div>
@@ -103,22 +115,29 @@ const ListItem: React.FC<{
                 <div className="flex items-center space-x-4">
                     <Button
                         type="link"
-                        icon={survey.marked ? <StarFilled className="text-yellow-400"/> : <StarOutlined/>}
+                        icon={survey.isStar ? <StarFilled className="text-yellow-400"/> : <StarOutlined/>}
                         size="small"
                         className="text-gray-500"
                         onClick={() => handleMark(survey.id)}
                     >
-                        标星
+                        Star
                     </Button>
+                    <Popconfirm
+                        title="确定复制该问卷？"
+                        onConfirm={() => handleCopy(survey.id)}
+                        onCancel={() => {}}
+                        okText="确定"
+                        cancelText="取消"
+                    >
                     <Button
                         type="link"
                         icon={<CopyOutlined/>}
                         size="small"
                         className="text-gray-500"
-                        onClick={() => handleCopy(survey.id)}
                     >
                         复制
                     </Button>
+                    </Popconfirm>
                     <Button
                         type="link"
                         icon={<DeleteOutlined/>}
