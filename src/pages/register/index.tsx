@@ -1,10 +1,31 @@
+// index.tsx
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import {registerService} from "../../services/user";
+import {useNavigate} from "react-router-dom";
 
 const Register: React.FC = () => {
-    const onFinish = (values: any) => {
-        console.log("Form Values:", values);
+
+    const nav = useNavigate()
+    const onFinish = async (values: any) => {
+        try {
+            const response = await registerService({
+                email: values.email,
+                name: values.username,
+                password: values.password,
+            });
+            console.log(response);
+            if (response.success) {
+                message.success(response.message);
+                nav("/login", {replace: true})
+            } else {
+                message.error(response.message);
+            }
+        } catch (error) {
+            console.error('Registration failed:', error);
+            message.error('注册过程中发生错误，请重试。');
+        }
     };
 
     return (
@@ -27,12 +48,12 @@ const Register: React.FC = () => {
                 >
                     {/* Username */}
                     <Form.Item
-                        label="用户名："
-                        name="username"
-                        rules={[{ required: true, message: "请输入用户名！" }]}
+                        label="邮箱："
+                        name="email"
+                        rules={[{ required: true, message: "请输入邮箱！" }]}
                     >
                         <Input
-                            placeholder="请输入用户名"
+                            placeholder="请输入邮箱"
                             prefix={<UserOutlined />}
                             className="rounded-md"
                         />
@@ -76,12 +97,12 @@ const Register: React.FC = () => {
 
                     {/* Nickname */}
                     <Form.Item
-                        label="昵称："
-                        name="nickname"
-                        rules={[{ required: true, message: "请输入昵称！" }]}
+                        label="用户名："
+                        name="username"
+                        rules={[{ required: true, message: "请输入用户名！" }]}
                     >
                         <Input
-                            placeholder="请输入昵称"
+                            placeholder="请输入用户名"
                             className="rounded-md"
                         />
                     </Form.Item>

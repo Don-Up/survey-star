@@ -1,17 +1,19 @@
 import React from "react";
 import "antd/dist/reset.css";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {Layout} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import styles from "./index.module.css"
 import Logo from "../../components/Logo";
-import UserInfo from "../../components/UserInfo";
 
 const MainLayout: React.FC = () => {
+
+    const nav = useNavigate()
+
     return (<Layout>
         <Header className={styles.header}>
             <Logo/>
-            <div className={"ml-auto"}>Login</div>
+            <div className={"ml-auto"} onClick={() => nav("login")}>Login</div>
         </Header>
         <Content className={styles.content}>
             <Outlet/>
