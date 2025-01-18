@@ -31,7 +31,7 @@ const ManageLayout: React.FC = () => {
         <Header>
             <div className={"flex"}>
                 <Logo/>
-                <UserInfo className={"ml-auto"}/>
+                {/*<UserInfo className={"ml-auto"}/>*/}
             </div>
         </Header>
         <Layout style={{height: "calc(100vh - 64px*2)"}}>

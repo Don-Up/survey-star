@@ -1,9 +1,21 @@
 import axios from "axios"
 import {message} from "antd";
+import {getToken} from "../utils/user-info";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 const instance = axios.create({
     timeout: 10 * 1000
 })
+
+instance.interceptors.request.use(config => {
+    const token = getToken()
+    console.log("token", token)
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+}, error => Promise.reject(error))
 
 instance.interceptors.response.use(res => {
     const resData = (res.data || {}) as ResDataType

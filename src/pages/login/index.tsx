@@ -1,10 +1,34 @@
+// index.tsx
 import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { loginService } from "../../services/user";
+import { useNavigate } from "react-router-dom";
+import {setEmail, setToken} from "../../utils/user-info";
 
 const Login: React.FC = () => {
-    const onFinish = (values: any) => {
-        console.log("Form Values:", values);
+    const navigate = useNavigate();
+
+    const onFinish = async (values: any) => {
+        try {
+            const response = await loginService({
+                email: values.username, // 假设用户名字段实际上是邮箱
+                password: values.password,
+            });
+            if (response.success) {
+                message.success("登录成功");
+                const { accessToken, email } = response
+                setToken(accessToken)
+                setEmail(email)
+                // 登录成功后跳转到首页或其他页面
+                navigate('/', { replace: true });
+            } else {
+                message.error(response.message);
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+            message.error('登录过程中发生错误，请重试。');
+        }
     };
 
     return (
