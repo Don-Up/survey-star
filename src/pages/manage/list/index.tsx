@@ -38,16 +38,12 @@ const List: React.FC = () => {
         if (currentSurveyId !== null) {
             updateQuestionnaireService(currentSurveyId, {isDeleted: true}).then(
                 (res) => {
-                    if(res.errno === 0){
-                        updateSurveys((draft) => {
-                            const index = draft.findIndex((s) => s.id === currentSurveyId);
-                            if (index !== -1) {
-                                draft.splice(index, 1);
-                            }
-                        });
-                    } else {
-                        console.log("delete questionnaire service error", res.code)
-                    }
+                    updateSurveys((draft) => {
+                        const index = draft.findIndex((s) => s.id === currentSurveyId);
+                        if (index !== -1) {
+                            draft.splice(index, 1);
+                        }
+                    });
                 }
             )
         }
@@ -65,14 +61,13 @@ const List: React.FC = () => {
             <div className={"flex justify-between"}>
                 <h1 className="text-xl font-bold mb-6">Questionnaire List</h1>
                 <ListSearch/>
-                {total}
             </div>
             {/* 问卷列表 */}
             <div className="space-y-6">
                 {loading && <div className={"text-center"}><Spin/></div>}
                 {!loading && surveys.length === 0 && <Empty description={"No data available"}/>}
                 {surveys.length > 0 && surveys.map((survey: any) => (
-                    <ListItem survey={survey} showConfirmDialog={showConfirmDialog} updateSurveys={updateSurveys}/>
+                    <ListItem survey={survey} showConfirmDialog={showConfirmDialog} updateSurveys={updateSurveys} key={survey.id}/>
                 ))}
                 <ListPagination total={total}/>
             </div>

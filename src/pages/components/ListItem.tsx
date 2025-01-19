@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Button, Divider, Popconfirm, Tag} from "antd";
+import {Button, Divider, message, Popconfirm, Tag} from "antd";
 import {
     BarChartOutlined,
     CopyOutlined,
@@ -30,34 +30,26 @@ const ListItem: React.FC<{
     // 复制问卷
     const handleCopy = (id: string) => {
         copyQuestionnaireService(id).then((res) => {
-            if (res.errno === 0) {
-                alert("copied")
-                updateSurveys((draft) => {
-                    const survey = draft.find((s: any) => s.id === id);
-                    if (survey) {
-                        const newSurvey = {...survey, id: draft.length + 1, title: `${survey.title} (副本)`};
-                        draft.push(newSurvey);
-                    }
-                });
-            } else {
-                console.log("copy questionnaire service error", res.code)
-            }
+            message.success("copied")
+            updateSurveys((draft) => {
+                const survey = draft.find((s: any) => s.id === id);
+                if (survey) {
+                    const newSurvey = {...survey, id: draft.length + 1, title: `${survey.title} (副本)`};
+                    draft.push(newSurvey);
+                }
+            });
         })
     };
 
     // 标星问卷
     const handleMark = (id: string) => {
         updateQuestionnaireService(id, {isStar: !survey.isStar}).then((res) => {
-            if (res.errno === 0) {
-                updateSurveys((draft) => {
-                    const survey = draft.find((s: any) => s.id === id);
-                    if (survey) {
-                        survey.isStar = !survey.isStar;
-                    }
-                });
-            } else {
-                console.log("update questionnaire service error", res.code)
-            }
+            updateSurveys((draft) => {
+                const survey = draft.find((s: any) => s.id === id);
+                if (survey) {
+                    survey.isStar = !survey.isStar;
+                }
+            });
         }).catch((err) => {
             console.log(err)
         })

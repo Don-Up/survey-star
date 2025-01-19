@@ -44,13 +44,9 @@ const Trash: React.FC = () => {
     // 确认彻底删除
     const confirmDelete = () => {
         deleteQuestionnaireService(selectedRowKeys).then(res => {
-            if(res.errno === 0){
-                setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
-                setSelectedRowKeys([]); // 清空选中项
-                setDialogVisible(false); // 关闭对话框
-            } else {
-                console.log(res.msg)
-            }
+            setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
+            setSelectedRowKeys([]); // 清空选中项
+            setDialogVisible(false); // 关闭对话框
         })
     };
 
@@ -89,11 +85,7 @@ const Trash: React.FC = () => {
     function handleRestore() {
         console.log("selectedRowKeys", selectedRowKeys)
         restoreDeletedQuestionnaireService(selectedRowKeys).then(res => {
-            if(res.errno === 0){
-                setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
-            } else {
-                console.log(res.msg)
-            }
+            setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
         })
     }
 

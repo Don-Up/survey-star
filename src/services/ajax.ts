@@ -1,16 +1,14 @@
 import axios from "axios"
 import {message} from "antd";
 import {getToken} from "../utils/user-info";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 const instance = axios.create({
     timeout: 10 * 1000
 })
 
 instance.interceptors.request.use(config => {
+    console.log(config.url)
     const token = getToken()
-    console.log("token", token)
     if (token) {
         config.headers.Authorization = `Bearer ${token}`
     }
@@ -19,7 +17,8 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(res => {
     const resData = (res.data || {}) as ResDataType
-    const {errno, data, msg} = resData
+    console.log("resData", resData)
+    const {errno, data = {}, msg = ""} = resData
     if (errno === 0) {
         return data
     } else {

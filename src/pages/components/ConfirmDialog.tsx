@@ -17,7 +17,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                                                      }) => {
     return (
         <Modal
-            visible={visible}
+            open={visible}
             title="确认操作"
             onOk={onConfirm}
             onCancel={onCancel}

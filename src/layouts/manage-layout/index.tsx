@@ -16,13 +16,13 @@ const ManageLayout: React.FC = () => {
 
     const {loading, run: handleCreateClick} = useRequest(createQuestionnaireService, {
         manual: true,
-        onSuccess: (res) => {
-            if (res) {
-                const {id} = res.data.data || {}
+        onSuccess: (data) => {
+            if (data) {
+                const {id} = data || {}
                 if (id) {
                     nav(`/questionnaire/edit/${id}`)
-                    message.success("Questionnaire created successfully")
                 }
+                message.success("Questionnaire created successfully")
             }
         },
     })
