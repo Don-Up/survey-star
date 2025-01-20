@@ -7,7 +7,6 @@ const QuestionnaireLayout: React.FC = () => {
 
     const {waitingUserData} = useLoadUserInfo()
     return (<div>
-        QuestionnaireLayout
         {waitingUserData ? <div className={"text-center mt-3"}><Spin/></div>:<Outlet/>}
     </div>)
 }

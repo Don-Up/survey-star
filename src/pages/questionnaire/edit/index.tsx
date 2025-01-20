@@ -7,10 +7,18 @@ import useLoadQuestionnaireData from "../../../hook/useLoadQuestionData";
  */
 export const Edit: React.FC = () => {
     const {loading, data} = useLoadQuestionnaireData()
-    return (<div>
-        <p>Edit Page</p>
-        <div>
-            {loading ? <p>loading</p> : <p>{JSON.stringify(data)}</p>}
+    return (<div className={"flex flex-col h-screen bg-edit"}>
+        <div className={"bg-white h-10"}>Header</div>
+        <div className={"flex-auto py-3"}>
+            <div className={"mx-6 flex h-full"}>
+                <div className={"w-[285px] bg-white px-4"}>Left</div>
+                <div className={"flex-1 relative overflow-hidden"}>
+                    <div className={"absolute w-[400px] h-[712px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow-custom"}>
+                        <div className={"h-[1000px]"}>画布, 测试滚动</div>
+                    </div>
+                </div>
+                <div className={"w-[300px] bg-white px-4"}>Right</div>
+            </div>
         </div>
     </div>)
 }
