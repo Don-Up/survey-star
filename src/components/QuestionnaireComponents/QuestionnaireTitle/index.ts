@@ -6,6 +6,6 @@ export * from "./interface";
 export default {
     title: "Title",
     type: "title",
-    component: Component,
+    Component: Component,
     defaultProps: QuestionnaireTitleDefaultProps
 }

@@ -3,6 +3,7 @@ import EditCanvas from "./EditCanvas";
 import useLoadQuestionnaireData1 from "../../../hook/useLoadQuestionnaireData";
 import {clearSelectedId} from "../../../store/selectIdReducer";
 import {useDispatch} from "react-redux";
+import LeftPanel from "./LeftPanel";
 
 /*
  * @description: Edit Questionnaire Page
@@ -19,7 +20,9 @@ export const Edit: React.FC = () => {
         <div className={"bg-white h-10"}>Header</div>
         <div className={"flex-auto py-3"}>
             <div className={"mx-6 flex h-full"}>
-                <div className={"w-[285px] bg-white px-4"}>Left</div>
+                <div className={"w-[285px] bg-white px-4"}>
+                    <LeftPanel/>
+                </div>
                 <div className={"flex-1 relative overflow-hidden"} onClick={handleClearSelectedId}>
                     <div className={"absolute w-[400px] h-[712px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow-custom"}>
                         <EditCanvas loading={loading}/>

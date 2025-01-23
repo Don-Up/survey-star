@@ -8,7 +8,7 @@ export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInpu
 export type ComponentConfType = {
     title: string
     type: string
-    component: FC<ComponentPropsType>
+    Component: FC<ComponentPropsType>
     defaultProps: ComponentPropsType
 }
 
@@ -20,3 +20,16 @@ const componentConfList: ComponentConfType[] = [
 export function getComponentConfByType(type: string){
     return componentConfList.find(conf => conf.type === type)
 }
+
+export const componentConfGroup = [
+    {
+        groupId: "text",
+        groupName: "Text Display",
+        components: [QuestionnaireTitleConf]
+    },
+    {
+        groupId: "input",
+        groupName: "User Input",
+        components: [QuestionnaireInputConf]
+    }
+]

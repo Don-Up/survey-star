@@ -6,6 +6,6 @@ export * from "./interface";
 export default {
     title: "Input",
     type: "input",
-    component: Component,
+    Component: Component,
     defaultProps: QuestionnaireInputDefaultProps
 }
