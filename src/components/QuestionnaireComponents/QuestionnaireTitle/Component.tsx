@@ -1,10 +1,10 @@
 import React from "react";
-import {QuestionnaireDefaultProps, QuestionnaireTitlePropsType} from "./interface";
+import {QuestionnaireTitleDefaultProps, QuestionnaireTitlePropsType} from "./interface";
 import {Typography} from "antd";
 
 const {Title} = Typography
 const QuestionnaireTitle:React.FC<QuestionnaireTitlePropsType> = (props) => {
-  const { text, level = 1, isCenter } = {...QuestionnaireDefaultProps, ...props}
+  const { text, level = 1, isCenter } = {...QuestionnaireTitleDefaultProps, ...props}
 
 
   const getFontSize = (level: number) => {

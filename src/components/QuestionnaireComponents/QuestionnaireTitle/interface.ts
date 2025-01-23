@@ -4,7 +4,7 @@ export type QuestionnaireTitlePropsType = {
     isCenter?: boolean
 }
 
-export const QuestionnaireDefaultProps: QuestionnaireTitlePropsType ={
+export const QuestionnaireTitleDefaultProps: QuestionnaireTitlePropsType ={
     text: 'A row of headers',
     level: 1,
     isCenter: false

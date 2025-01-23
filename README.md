@@ -25,7 +25,7 @@
   - questionnaire
   - register
 - router
-  - index.tsx 
+  - Component.tsx 
 - services
   - ajax.ts
   - questionnaire.ts
@@ -33,5 +33,5 @@
 - global.d.ts
 - i18n.js
 - index.css
-- index.tsx
+- Component.tsx
 ```
