@@ -7,7 +7,7 @@ import ListSearch from "../../../components/ListSearch";
 import ListItem from "../../components/ListItem";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
 import ListPagination from "../../../components/ListPagination";
-import {deleteQuestionnaireService, updateQuestionnaireService} from "../../../services/questionnaire";
+import {updateQuestionnaireService} from "../../../services/questionnaire";
 
 /*
  * Questionnaire List

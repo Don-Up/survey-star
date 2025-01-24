@@ -1,16 +1,8 @@
-import React, { useState } from "react";
-import { Table, Tag, Input, Button, Modal } from "antd";
+import React, {useState} from "react";
+import {Button, Input, Table, Tag} from "antd";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import useLoadQuestionnaireListData from "../../../hook/useLoadQuestionListData";
 import {deleteQuestionnaireService, restoreDeletedQuestionnaireService} from "../../../services/questionnaire";
-
-interface Survey {
-    id: number;
-    title: string;
-    status: "已发布" | "未发布";
-    answers: number;
-    date: string;
-}
 
 const Trash: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>(""); // 搜索关键词
@@ -18,7 +10,7 @@ const Trash: React.FC = () => {
 
     const [total, setTotal] = useState(0)
 
-    const { loading } = useLoadQuestionnaireListData((list: [], pagination: any) => {
+    useLoadQuestionnaireListData((list: [], pagination: any) => {
         setData(list)
         setTotal(pagination.total)
     }, { isDeleted: true })

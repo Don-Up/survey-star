@@ -1,9 +1,6 @@
 import {ComponentPropsType} from "../../components/QuestionnaireComponents";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {produce} from "immer";
-import {useDispatch, useSelector} from "react-redux";
-import {StateType} from "../index";
-import {setSelectedId} from "../selectIdReducer";
 
 export type ComponentInfoType = {
     uuid: string

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import QuestionnaireTitle from "../../../components/QuestionnaireComponents/QuestionnaireTitle/Component";
 import QuestionnaireInput from "../../../components/QuestionnaireComponents/QuestionnaireInput/Component";
 import styles from "./index.module.css"
