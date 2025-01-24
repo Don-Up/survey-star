@@ -6,8 +6,13 @@ const {Title} = Typography
 
 function getComponent(c: ComponentConfType) {
     const {title, type, Component} = c
+
+    function handleClick() {
+
+    }
+
     return <div
-        className={"mb-3 cursor-pointer bg-white p-3 border border-solid border-white rounded hover:border-gray-300"}>
+        className={"mb-3 cursor-pointer bg-white p-3 border border-solid border-white rounded hover:border-gray-300"} onClick={handleClick}>
         <div className={"pointer-events-none"}>
             <Component/>
         </div>
