@@ -32,9 +32,9 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     const selectedId = useSelector<StateType>(state => state.selectedId)
     const dispatch = useDispatch()
     if(components.length>0){
-        dispatch(setSelectedId(components[0].id))
+        dispatch(setSelectedId(components[0].uuid))
     }
-    function handleClick(event: React.MouseEvent<HTMLDivElement>, id: number) {
+    function handleClick(event: React.MouseEvent<HTMLDivElement>, id: string) {
         if (id !== selectedId) {
             event.stopPropagation()
             dispatch(setSelectedId(id))
@@ -46,14 +46,14 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     }
     return (<div className={"min-h-full bg-white overflow-hidden"}>
         {components.map(c => {
-            const {id} = c
+            const {uuid} = c
             const wrapperDefClassName = styles["component-wrapper"]
             const selectedClassName = styles.selected
             const wrapperClassName = classNames({
                 [wrapperDefClassName]: true,
-                [selectedClassName]: selectedId === Number(id)
+                [selectedClassName]: selectedId === uuid
             })
-            return <div key={id} className={wrapperClassName} onClick={(e) => handleClick(e, Number(id))}>
+            return <div key={uuid} className={wrapperClassName} onClick={(e) => handleClick(e, uuid)}>
                 <div className={styles["component"]}>
                     {
                         getComponent(c)

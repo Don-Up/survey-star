@@ -7,7 +7,7 @@ import selectedIdReducer from "./selectIdReducer";
 export type StateType = {
     user: UserStateType
     components: ComponentInfoType[]
-    selectedId: number | null
+    selectedId: string | null
 }
 
 export default configureStore({
