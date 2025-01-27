@@ -4,16 +4,23 @@ import {Form, Input} from "antd";
 
 const PropComponent: React.FC<QuestionnaireInputPropsType>
     = (props) => {
-    const {title, placeholder} = props
+    const {title, placeholder, onChange} = props
     const [form] = Form.useForm()
 
     useEffect(() => {
         form.setFieldsValue({title, placeholder})
     }, [title, placeholder]);
 
+    function handleValuesChange(){
+        if(onChange){
+            onChange(form.getFieldsValue())
+        }
+    }
+
     return (<Form
         form={form}
         layout={"vertical"}
+        onValuesChange={handleValuesChange}
         initialValues={{title, placeholder}}
     >
         <Form.Item label={"Title"} name={"title"} rules={[{required: true, message: "Please enter a title."}]}>

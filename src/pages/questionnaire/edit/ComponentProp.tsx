@@ -1,6 +1,8 @@
 import React, {FC} from "react";
 import useGetComponentInfo from "../../../hook/useGetComponentInfo";
-import {getComponentConfByType} from "../../../components/QuestionnaireComponents";
+import {ComponentPropsType, getComponentConfByType} from "../../../components/QuestionnaireComponents";
+import {useDispatch} from "react-redux";
+import {changeComponentProps} from "../../../store/componentsReducer";
 
 const NoProp: FC = () => {
     return <div className={"text-center"}>No components are selected</div>
@@ -8,14 +10,24 @@ const NoProp: FC = () => {
 
 const ComponentProp: React.FC = () => {
     const {selectedComponent} = useGetComponentInfo()
+
+    const dispatch = useDispatch()
+
     if (selectedComponent == null) return <NoProp/>
     const {type, props} = selectedComponent
     const componentConf = getComponentConfByType(type)
 
     if (componentConf == null) return <NoProp/>
+    
+    function changeProps(newProps: ComponentPropsType){
+        if(selectedComponent == null) return
+        const { uuid } = selectedComponent
+        dispatch(changeComponentProps({id: uuid, newProps}))
+        console.log("newProps", uuid, newProps)
+    }
+    
     const {PropComponent} = componentConf
-    console.log("props", props)
-    return (<PropComponent  { ...props }/>)
+    return (<PropComponent  { ...props } onChange={changeProps}/>)
 }
 
 export default ComponentProp

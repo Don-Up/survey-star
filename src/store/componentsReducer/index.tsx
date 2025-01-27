@@ -30,9 +30,19 @@ export const componentsSlice = createSlice({
                 draft.splice(index + 1, 0, component)
             }
         }),
+        changeComponentProps: produce((draft: ComponentInfoType[], action: PayloadAction<{id: string, newProps: ComponentPropsType}>) => {
+            const {id, newProps} = action.payload
+            const index = draft.findIndex(item => item.uuid === id)
+            if(index >= 0){
+                draft[index].props = {
+                    ...draft[index].props,
+                    ...newProps
+                }
+            }
+        }),
     }
 })
 
-export const {resetComponents, addComponent} = componentsSlice.actions
+export const {resetComponents, addComponent, changeComponentProps} = componentsSlice.actions
 
 export default componentsSlice.reducer
