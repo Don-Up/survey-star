@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 const INIT_SELECTED_ID = null
@@ -7,7 +7,8 @@ export const selectedIdSlice = createSlice({
     name: 'selectedId',
     initialState: INIT_SELECTED_ID,
     reducers: {
-        setSelectedId: (state, action) => {
+        setSelectedId: (state, action:{payload: any, type: string}) => {
+            console.log("newId", action.payload)
             return action.payload
         },
         clearSelectedId: () => {

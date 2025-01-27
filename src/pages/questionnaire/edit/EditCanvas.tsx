@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import QuestionnaireTitle from "../../../components/QuestionnaireComponents/QuestionnaireTitle/Component";
 import QuestionnaireInput from "../../../components/QuestionnaireComponents/QuestionnaireInput/Component";
 import styles from "./index.module.css"
@@ -31,12 +31,19 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     const {components} = useGetComponentInfo()
     const selectedId = useSelector<StateType>(state => state.selectedId)
     const dispatch = useDispatch()
-    if(components.length>0){
-        dispatch(setSelectedId(components[0].uuid))
-    }
+    useEffect(() => {
+        if(components.length>0){
+            // 125
+            dispatch(setSelectedId(components[0].uuid))
+        }
+    }, []);
+
     function handleClick(event: React.MouseEvent<HTMLDivElement>, id: string) {
+        console.log("id", id)
+
         if (id !== selectedId) {
             event.stopPropagation()
+            // 123
             dispatch(setSelectedId(id))
         }
     }

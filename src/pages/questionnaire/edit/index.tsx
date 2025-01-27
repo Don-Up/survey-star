@@ -4,6 +4,7 @@ import useLoadQuestionnaireData1 from "../../../hook/useLoadQuestionnaireData";
 import {clearSelectedId} from "../../../store/selectIdReducer";
 import {useDispatch} from "react-redux";
 import LeftPanel from "./LeftPanel";
+import RightPanel from "./RightPanel";
 
 /*
  * @description: Edit Questionnaire Page
@@ -28,7 +29,9 @@ export const Edit: React.FC = () => {
                         <EditCanvas loading={loading}/>
                     </div>
                 </div>
-                <div className={"w-[300px] bg-white px-4"}>Right</div>
+                <div className={"w-[300px] bg-white px-4"}>
+                    <RightPanel/>
+                </div>
             </div>
         </div>
     </div>)

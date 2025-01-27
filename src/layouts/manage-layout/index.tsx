@@ -13,18 +13,19 @@ const { Header, Footer, Content,
 
 const ManageLayout: React.FC = () => {
     const nav = useNavigate()
+    const handleSuccess = (data: any) => {
+        if (data) {
+            const { id } = data || {};
+            if (id) {
+                nav(`/questionnaire/edit/${id}`);
+            }
+            message.success("Questionnaire created successfully");
+        }
+    };
 
     const {loading, run: handleCreateClick} = useRequest(createQuestionnaireService, {
         manual: true,
-        onSuccess: (data) => {
-            if (data) {
-                const {id} = data || {}
-                if (id) {
-                    nav(`/questionnaire/edit/${id}`)
-                }
-                message.success("Questionnaire created successfully")
-            }
-        },
+        onSuccess: handleSuccess,
     })
 
     return  <Layout>

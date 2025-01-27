@@ -10,10 +10,11 @@ const PropComponent: React.FC<QuestionnaireTitlePropsType> = (props) => {
     }, [text, level, isCenter]);
 
     return (<Form
+        form={form}
         layout={"vertical"}
         initialValues={{ text, level, isCenter }}
     >
-        <Form.Item label={"Title"} name={"title"} rules={[{ required: true, message: "Please enter a Title." }]}>
+        <Form.Item label={"Title"} name={"text"} rules={[{ required: true, message: "Please enter a Title." }]}>
             <Input/>
         </Form.Item>
         <Form.Item label={"Level"} name={"level"}>

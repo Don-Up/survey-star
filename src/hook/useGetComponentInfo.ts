@@ -6,9 +6,14 @@ import {ComponentInfoType} from "../store/componentsReducer";
 function useGetComponentInfo(){
     const components = useSelector<StateType>(state => state.components) as ComponentInfoType[];
 
-    // console.log("xxxx", components, components.length)
+    const selectedId = useSelector<StateType>(state => state.selectedId) as string;
+
+    const selectedComponent = components.find(c => c.uuid === selectedId);
+
     return {
-        components
+        components,
+        selectedId,
+        selectedComponent
     }
 }
 

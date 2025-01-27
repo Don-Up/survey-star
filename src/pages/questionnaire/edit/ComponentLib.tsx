@@ -25,6 +25,7 @@ const ComponentRenderer: React.FC<{ c: ComponentConfType }> = ({ c }) => {
             },
             selectedId,
         }));
+        // 124
         dispatch(setSelectedId(uuid))
     }
 

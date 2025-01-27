@@ -12,6 +12,7 @@ const PropComponent: React.FC<QuestionnaireInputPropsType>
     }, [title, placeholder]);
 
     return (<Form
+        form={form}
         layout={"vertical"}
         initialValues={{title, placeholder}}
     >
