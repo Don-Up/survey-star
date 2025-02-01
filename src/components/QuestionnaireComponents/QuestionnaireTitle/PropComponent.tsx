@@ -3,7 +3,7 @@ import {QuestionnaireTitlePropsType} from "./interface";
 import {Checkbox, Form, Input, Select} from "antd";
 
 const PropComponent: React.FC<QuestionnaireTitlePropsType> = (props) => {
-    const {text, level, isCenter, onChange} = props
+    const {text, level, isCenter, onChange, disabled} = props
     const [form] = Form.useForm()
     useEffect(() => {
         form.setFieldsValue({text, level, isCenter})
@@ -20,6 +20,7 @@ const PropComponent: React.FC<QuestionnaireTitlePropsType> = (props) => {
         layout={"vertical"}
         onValuesChange={handleValuesChange}
         initialValues={{text, level, isCenter}}
+        disabled={disabled}
     >
         <Form.Item label={"Title"} name={"text"} rules={[{required: true, message: "Please enter a Title."}]}>
             <Input/>

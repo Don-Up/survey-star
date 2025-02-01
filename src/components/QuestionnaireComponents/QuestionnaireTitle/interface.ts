@@ -4,6 +4,7 @@ export type QuestionnaireTitlePropsType = {
     isCenter?: boolean
 
     onChange?: (newProps: QuestionnaireTitlePropsType) => void
+    disabled?: boolean
 }
 
 export const QuestionnaireTitleDefaultProps: QuestionnaireTitlePropsType ={

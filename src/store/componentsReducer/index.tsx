@@ -7,6 +7,7 @@ export type ComponentInfoType = {
     type: string
     title: string
     isHidden?: boolean
+    isLocked?: boolean
     props: ComponentPropsType
 }
 
@@ -67,6 +68,16 @@ export const componentsSlice = createSlice({
             if (index >= 0) {
                 draft[index].isHidden = isHidden
             }
+        }),
+        // Lock component
+        toggleComponentLock: produce((draft: ComponentInfoType[], action: PayloadAction<{
+            id: string
+        }>) => {
+            const {id} = action.payload
+            const index = draft.findIndex(item => item.uuid === id)
+            if (index >= 0) {
+                draft[index].isLocked = !draft[index].isLocked
+            }
         })
     }
 })
@@ -76,7 +87,8 @@ export const {
     addComponent,
     changeComponentProps,
     removeSelectedComponent,
-    changeComponentVisibility
+    changeComponentVisibility,
+    toggleComponentLock
 } = componentsSlice.actions
 
 export default componentsSlice.reducer

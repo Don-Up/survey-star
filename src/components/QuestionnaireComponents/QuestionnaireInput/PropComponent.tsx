@@ -4,7 +4,7 @@ import {Form, Input} from "antd";
 
 const PropComponent: React.FC<QuestionnaireInputPropsType>
     = (props) => {
-    const {title, placeholder, onChange} = props
+    const {title, placeholder, onChange, disabled} = props
     const [form] = Form.useForm()
 
     useEffect(() => {
@@ -22,6 +22,7 @@ const PropComponent: React.FC<QuestionnaireInputPropsType>
         layout={"vertical"}
         onValuesChange={handleValuesChange}
         initialValues={{title, placeholder}}
+        disabled={disabled}
     >
         <Form.Item label={"Title"} name={"title"} rules={[{required: true, message: "Please enter a title."}]}>
             <Input/>

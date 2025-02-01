@@ -53,12 +53,14 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     }
     return (<div className={"min-h-full bg-white overflow-hidden"}>
         {components.filter(c => !c.isHidden).map(c => {
-            const {uuid} = c
+            const {uuid, isLocked} = c
             const wrapperDefClassName = styles["component-wrapper"]
             const selectedClassName = styles.selected
+            const lockedClassName = styles.locked
             const wrapperClassName = classNames({
                 [wrapperDefClassName]: true,
-                [selectedClassName]: selectedId === uuid
+                [selectedClassName]: selectedId === uuid,
+                [lockedClassName]: isLocked
             })
             return <div key={uuid} className={wrapperClassName} onClick={(e) => handleClick(e, uuid)}>
                 <div className={styles["component"]}>

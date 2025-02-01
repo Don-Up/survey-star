@@ -1,16 +1,21 @@
 import React from "react";
 import {Button, Space, Tooltip} from "antd";
-import {DeleteOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
-import {useDispatch, useSelector} from "react-redux";
-import {changeComponentVisibility, ComponentInfoType, removeSelectedComponent} from "../../../store/componentsReducer";
-import {StateType} from "../../../store";
+import {DeleteOutlined, EyeInvisibleOutlined, LockOutlined} from "@ant-design/icons";
+import {useDispatch} from "react-redux";
+import {
+    changeComponentVisibility,
+    ComponentInfoType,
+    removeSelectedComponent,
+    toggleComponentLock
+} from "../../../store/componentsReducer";
 import {getNextSelectedId} from "../../../store/utils";
 import {setSelectedId} from "../../../store/selectIdReducer";
+import useGetComponentInfo from "../../../hook/useGetComponentInfo";
 
 const EditToolbar: React.FC = () => {
     const dispatch = useDispatch()
-    const selectedId = useSelector<StateType>(state => state.selectedId) as string;
-    const components = useSelector<StateType>(state => state.components) as ComponentInfoType[]
+    const {selectedId, selectedComponent, components} = useGetComponentInfo()
+    const {isLocked} = ( selectedComponent as ComponentInfoType) || {}
 
     function handleDelete() {
         dispatch(removeSelectedComponent(selectedId))
@@ -31,6 +36,10 @@ const EditToolbar: React.FC = () => {
         }
     }
 
+    function handleLock() {
+        dispatch(toggleComponentLock({id: selectedId}))
+    }
+
     return (<div>
         <Space>
             <Tooltip title={"Del"}>
@@ -38,6 +47,10 @@ const EditToolbar: React.FC = () => {
             </Tooltip>
             <Tooltip title={"Hide"}>
                 <Button shape={"circle"} icon={<EyeInvisibleOutlined/>} onClick={handleHide}/>
+            </Tooltip>
+            <Tooltip title={"Lock"}>
+                <Button shape={"circle"} icon={<LockOutlined/>} onClick={handleLock}
+                    type={isLocked ? "primary" : "default"}/>
             </Tooltip>
         </Space>
     </div>)
