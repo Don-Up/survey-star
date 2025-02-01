@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../../store";
 import {setSelectedId} from "../../../store/selectIdReducer";
+import useBindCanvasKey from "../../../hook/useBindCanvasKey";
 
 type PropsType = {
     loading: boolean
@@ -37,6 +38,8 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
             dispatch(setSelectedId(components[0].uuid))
         }
     }, []);
+
+    useBindCanvasKey()
 
     function handleClick(event: React.MouseEvent<HTMLDivElement>, id: string) {
         console.log("id", id)

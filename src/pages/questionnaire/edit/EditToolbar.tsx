@@ -18,7 +18,7 @@ import {nanoid} from "@reduxjs/toolkit";
 const EditToolbar: React.FC = () => {
     const dispatch = useDispatch()
     const {selectedId, selectedComponent, components, copiedComponent} = useGetComponentInfo()
-    const {isLocked} = ( selectedComponent as ComponentInfoType) || {}
+    const {isLocked} = (selectedComponent as ComponentInfoType) || {}
 
     function handleDelete() {
         dispatch(removeSelectedComponent(selectedId))
@@ -48,13 +48,27 @@ const EditToolbar: React.FC = () => {
     }
 
     function handlePaste() {
-        if(copiedComponent != null){
+        if (copiedComponent != null) {
             const newId = nanoid()
             dispatch(addComponent({
                 component: {...copiedComponent, uuid: newId},
                 selectedId,
             }))
         }
+    }
+
+    function selectPrevious() {
+        const selectIndex = components.findIndex(item => item.uuid === selectedId)
+        // If the current index is 0, there is no previous component.
+        if (selectIndex <= 0) return
+        dispatch(setSelectedId(components[selectIndex - 1].uuid))
+    }
+
+    function selectNext() {
+        const selectIndex = components.findIndex(item => item.uuid === selectedId)
+        // If the current index is the last index, there is no next component.
+        if (selectIndex < 0 || selectIndex >= components.length - 1) return
+        dispatch(setSelectedId(components[selectIndex + 1].uuid))
     }
 
     return (<div>
@@ -67,11 +81,11 @@ const EditToolbar: React.FC = () => {
             </Tooltip>
             <Tooltip title={"Lock"}>
                 <Button shape={"circle"} icon={<LockOutlined/>} onClick={handleLock}
-                    type={isLocked ? "primary" : "default"}/>
+                        type={isLocked ? "primary" : "default"}/>
             </Tooltip>
             <Tooltip title={"Copy"}>
                 <Button shape={"circle"} icon={<CopyOutlined/>} onClick={handleCopy}
-                    disabled={selectedComponent == null}/>
+                        disabled={selectedComponent == null}/>
             </Tooltip>
             <Tooltip title={"Paste"}>
                 <Button shape={"circle"} icon={<BlockOutlined/>}
