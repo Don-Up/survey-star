@@ -1,8 +1,9 @@
 import React from "react";
 import {Button, Space, Tooltip} from "antd";
-import {DeleteOutlined, EyeInvisibleOutlined, LockOutlined} from "@ant-design/icons";
+import {BlockOutlined, CopyOutlined, DeleteOutlined, EyeInvisibleOutlined, LockOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
 import {
+    addComponent,
     changeComponentVisibility,
     ComponentInfoType,
     removeSelectedComponent,
@@ -11,10 +12,12 @@ import {
 import {getNextSelectedId} from "../../../store/utils";
 import {setSelectedId} from "../../../store/selectIdReducer";
 import useGetComponentInfo from "../../../hook/useGetComponentInfo";
+import {copySelectedComponent} from "../../../store/copyReducer";
+import {nanoid} from "@reduxjs/toolkit";
 
 const EditToolbar: React.FC = () => {
     const dispatch = useDispatch()
-    const {selectedId, selectedComponent, components} = useGetComponentInfo()
+    const {selectedId, selectedComponent, components, copiedComponent} = useGetComponentInfo()
     const {isLocked} = ( selectedComponent as ComponentInfoType) || {}
 
     function handleDelete() {
@@ -40,6 +43,20 @@ const EditToolbar: React.FC = () => {
         dispatch(toggleComponentLock({id: selectedId}))
     }
 
+    function handleCopy() {
+        dispatch(copySelectedComponent(selectedComponent))
+    }
+
+    function handlePaste() {
+        if(copiedComponent != null){
+            const newId = nanoid()
+            dispatch(addComponent({
+                component: {...copiedComponent, uuid: newId},
+                selectedId,
+            }))
+        }
+    }
+
     return (<div>
         <Space>
             <Tooltip title={"Del"}>
@@ -51,6 +68,16 @@ const EditToolbar: React.FC = () => {
             <Tooltip title={"Lock"}>
                 <Button shape={"circle"} icon={<LockOutlined/>} onClick={handleLock}
                     type={isLocked ? "primary" : "default"}/>
+            </Tooltip>
+            <Tooltip title={"Copy"}>
+                <Button shape={"circle"} icon={<CopyOutlined/>} onClick={handleCopy}
+                    disabled={selectedComponent == null}/>
+            </Tooltip>
+            <Tooltip title={"Paste"}>
+                <Button shape={"circle"} icon={<BlockOutlined/>}
+                        onClick={handlePaste}
+                        disabled={copiedComponent == null}
+                />
             </Tooltip>
         </Space>
     </div>)

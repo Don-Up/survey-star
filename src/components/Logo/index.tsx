@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {Space, Typography} from "antd";
 import {FormOutlined} from "@ant-design/icons";
-import {useTranslationHelper} from "../../hook/useTranslationHelper";
 import {Link} from "react-router-dom";
 import {useGetUserInfo} from "../../hook/useGetUserInfo";
 import {MANAGE_INDEX_PATHNAME} from "../../router";
+import {useTranslation} from "react-i18next";
 
 const {Title} = Typography
 const Logo: React.FC = () => {
 
-    const t = useTranslationHelper()
+    const { t } = useTranslation()
 
     const {name} = useGetUserInfo()
 

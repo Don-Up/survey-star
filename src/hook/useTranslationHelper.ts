@@ -1,4 +1,4 @@
-// src/hooks/useTranslationHelper.js
+// src/hooks/useTranslationHelper.ts
 import { useTranslation } from 'react-i18next';
 
 export const useTranslationHelper = () => {

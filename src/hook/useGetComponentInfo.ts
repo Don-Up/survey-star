@@ -10,10 +10,13 @@ function useGetComponentInfo(){
 
     const selectedComponent = components.find(c => c.uuid === selectedId);
 
+    const copiedComponent = useSelector<StateType>(state => state.copy) as ComponentInfoType;
+
     return {
         components,
         selectedId,
-        selectedComponent
+        selectedComponent,
+        copiedComponent
     }
 }
 
