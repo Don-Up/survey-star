@@ -52,7 +52,7 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
         return <div className={"text-center mt-6"}><Spin/></div>
     }
     return (<div className={"min-h-full bg-white overflow-hidden"}>
-        {components.map(c => {
+        {components.filter(c => !c.isHidden).map(c => {
             const {uuid} = c
             const wrapperDefClassName = styles["component-wrapper"]
             const selectedClassName = styles.selected

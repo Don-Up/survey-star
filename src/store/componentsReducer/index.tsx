@@ -6,6 +6,7 @@ export type ComponentInfoType = {
     uuid: string
     type: string
     title: string
+    isHidden?: boolean
     props: ComponentPropsType
 }
 
@@ -20,11 +21,14 @@ export const componentsSlice = createSlice({
             return action.payload
         },
         // Add component
-        addComponent: produce((draft: ComponentInfoType[], action: PayloadAction<{component:ComponentInfoType, selectedId: string}>) => {
+        addComponent: produce((draft: ComponentInfoType[], action: PayloadAction<{
+            component: ComponentInfoType,
+            selectedId: string
+        }>) => {
             const {component, selectedId} = action.payload
             const index = draft.findIndex(item => item.uuid === selectedId)
 
-            if(index < 0){
+            if (index < 0) {
                 // No component is selected
                 draft.push(component)
             } else {
@@ -33,10 +37,13 @@ export const componentsSlice = createSlice({
             }
         }),
         // Change component props
-        changeComponentProps: produce((draft: ComponentInfoType[], action: PayloadAction<{id: string, newProps: ComponentPropsType}>) => {
+        changeComponentProps: produce((draft: ComponentInfoType[], action: PayloadAction<{
+            id: string,
+            newProps: ComponentPropsType
+        }>) => {
             const {id, newProps} = action.payload
             const index = draft.findIndex(item => item.uuid === id)
-            if(index >= 0){
+            if (index >= 0) {
                 draft[index].props = {
                     ...draft[index].props,
                     ...newProps
@@ -46,8 +53,19 @@ export const componentsSlice = createSlice({
         // Delete component
         removeSelectedComponent: produce((draft: ComponentInfoType[], action: PayloadAction<string>) => {
             const index = draft.findIndex(item => item.uuid === action.payload)
-            if(index >= 0){
+            if (index >= 0) {
                 draft.splice(index, 1)
+            }
+        }),
+        // Hide component
+        changeComponentVisibility: produce((draft: ComponentInfoType[], action: PayloadAction<{
+            id: string,
+            isHidden: boolean
+        }>) => {
+            const {id, isHidden} = action.payload
+            const index = draft.findIndex(item => item.uuid === id)
+            if (index >= 0) {
+                draft[index].isHidden = isHidden
             }
         })
     }
@@ -57,7 +75,8 @@ export const {
     resetComponents,
     addComponent,
     changeComponentProps,
-    removeSelectedComponent
+    removeSelectedComponent,
+    changeComponentVisibility
 } = componentsSlice.actions
 
 export default componentsSlice.reducer

@@ -13,8 +13,9 @@ import {ComponentInfoType} from "./componentsReducer";
  * @returns The UUID of the next selected component, or an empty string if no next component is available.
  */
 export function getNextSelectedId(uuid: string, componentList: ComponentInfoType[]){
+    const visibleComponents = componentList.filter(c => !c.isHidden)
     // Find the index of the component with the specified UUID
-    const index = componentList.findIndex(c => c.uuid === uuid);
+    const index = visibleComponents.findIndex(c => c.uuid === uuid);
     // If the component is not found, return an empty string
     if(index < 0){
         return "";
@@ -22,7 +23,7 @@ export function getNextSelectedId(uuid: string, componentList: ComponentInfoType
     // Initialize the next selected component's UUID as an empty string
     let nextSelectedId = "";
     // Get the length of the component list
-    const length = componentList.length
+    const length = visibleComponents.length
     // If the list contains only one component, return an empty string
     if(length <= 1){
         return "";
@@ -30,10 +31,10 @@ export function getNextSelectedId(uuid: string, componentList: ComponentInfoType
         // If the current component is the last in the list
         if(index === length - 1){
             // Set the next selected component's UUID to the previous component's UUID
-            nextSelectedId = componentList[index - 1].uuid;
+            nextSelectedId = visibleComponents[index - 1].uuid;
         } else {
             // Otherwise, set the next selected component's UUID to the next component's UUID
-            nextSelectedId = componentList[index + 1].uuid;
+            nextSelectedId = visibleComponents[index + 1].uuid;
         }
     }
     // Return the UUID of the next selected component
