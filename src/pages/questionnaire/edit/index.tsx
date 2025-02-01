@@ -5,6 +5,7 @@ import {clearSelectedId} from "../../../store/selectIdReducer";
 import {useDispatch} from "react-redux";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
+import EditHeader from "./EditHeader";
 
 /*
  * @description: Edit Questionnaire Page
@@ -18,7 +19,7 @@ export const Edit: React.FC = () => {
     }
 
     return (<div className={"flex flex-col h-screen bg-edit"}>
-        <div className={"bg-white h-10"}>Header</div>
+        <EditHeader/>
         <div className={"flex-auto py-3"}>
             <div className={"mx-6 flex h-full"}>
                 <div className={"w-[285px] bg-white px-4"}>

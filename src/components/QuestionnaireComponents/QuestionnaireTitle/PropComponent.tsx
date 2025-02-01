@@ -3,14 +3,14 @@ import {QuestionnaireTitlePropsType} from "./interface";
 import {Checkbox, Form, Input, Select} from "antd";
 
 const PropComponent: React.FC<QuestionnaireTitlePropsType> = (props) => {
-    const { text, level, isCenter, onChange } = props
+    const {text, level, isCenter, onChange} = props
     const [form] = Form.useForm()
     useEffect(() => {
         form.setFieldsValue({text, level, isCenter})
     }, [text, level, isCenter]);
 
-    function handleValuesChange(){
-        if(onChange){
+    function handleValuesChange() {
+        if (onChange) {
             onChange(form.getFieldsValue())
         }
     }
@@ -19,9 +19,9 @@ const PropComponent: React.FC<QuestionnaireTitlePropsType> = (props) => {
         form={form}
         layout={"vertical"}
         onValuesChange={handleValuesChange}
-        initialValues={{ text, level, isCenter }}
+        initialValues={{text, level, isCenter}}
     >
-        <Form.Item label={"Title"} name={"text"} rules={[{ required: true, message: "Please enter a Title." }]}>
+        <Form.Item label={"Title"} name={"text"} rules={[{required: true, message: "Please enter a Title."}]}>
             <Input/>
         </Form.Item>
         <Form.Item label={"Level"} name={"level"}>

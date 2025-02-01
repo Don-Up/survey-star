@@ -23,7 +23,6 @@ const ComponentProp: React.FC = () => {
         if(selectedComponent == null) return
         const { uuid } = selectedComponent
         dispatch(changeComponentProps({id: uuid, newProps}))
-        console.log("newProps", uuid, newProps)
     }
     
     const {PropComponent} = componentConf

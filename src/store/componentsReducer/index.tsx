@@ -15,9 +15,11 @@ export const componentsSlice = createSlice({
     name: 'components',
     initialState: INIT_STATE,
     reducers: {
+        // Reset components
         resetComponents: (state: ComponentInfoType[], action: PayloadAction<ComponentInfoType[]>) => {
             return action.payload
         },
+        // Add component
         addComponent: produce((draft: ComponentInfoType[], action: PayloadAction<{component:ComponentInfoType, selectedId: string}>) => {
             const {component, selectedId} = action.payload
             const index = draft.findIndex(item => item.uuid === selectedId)
@@ -30,6 +32,7 @@ export const componentsSlice = createSlice({
                 draft.splice(index + 1, 0, component)
             }
         }),
+        // Change component props
         changeComponentProps: produce((draft: ComponentInfoType[], action: PayloadAction<{id: string, newProps: ComponentPropsType}>) => {
             const {id, newProps} = action.payload
             const index = draft.findIndex(item => item.uuid === id)
@@ -40,9 +43,21 @@ export const componentsSlice = createSlice({
                 }
             }
         }),
+        // Delete component
+        removeSelectedComponent: produce((draft: ComponentInfoType[], action: PayloadAction<string>) => {
+            const index = draft.findIndex(item => item.uuid === action.payload)
+            if(index >= 0){
+                draft.splice(index, 1)
+            }
+        })
     }
 })
 
-export const {resetComponents, addComponent, changeComponentProps} = componentsSlice.actions
+export const {
+    resetComponents,
+    addComponent,
+    changeComponentProps,
+    removeSelectedComponent
+} = componentsSlice.actions
 
 export default componentsSlice.reducer
