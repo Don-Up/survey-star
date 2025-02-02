@@ -11,6 +11,7 @@ import {StateType} from "../../../store";
 import {setSelectedId} from "../../../store/selectIdReducer";
 import useBindCanvasKey from "../../../hook/useBindCanvasKey";
 import QuestionnaireParagraph from "../../../components/QuestionnaireComponents/QuestionnaireParagraph/Component";
+import QuestionnaireInfo from "../../../components/QuestionnaireComponents/QuestionnaireInfo/Component";
 
 type PropsType = {
     loading: boolean
@@ -25,6 +26,8 @@ function getComponent(componentInfo: ComponentInfoType) {
             return <QuestionnaireInput {...props}/>
         case  "paragraph":
             return <QuestionnaireParagraph {...props}/>
+        case "info":
+            return <QuestionnaireInfo {...props}/>
         default:
             return null
     }
