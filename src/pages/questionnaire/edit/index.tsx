@@ -22,7 +22,7 @@ export const Edit: React.FC = () => {
         <EditHeader/>
         <div className={"flex-auto py-3"}>
             <div className={"mx-6 flex h-full"}>
-                <div className={"w-[285px] bg-white px-4"}>
+                <div className={"w-[295px] bg-white px-4"}>
                     <LeftPanel/>
                 </div>
                 <div className={"flex-1 relative overflow-hidden"} onClick={handleClearSelectedId}>

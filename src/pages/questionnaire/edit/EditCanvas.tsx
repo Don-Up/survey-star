@@ -13,6 +13,7 @@ import useBindCanvasKey from "../../../hook/useBindCanvasKey";
 import QuestionnaireParagraph from "../../../components/QuestionnaireComponents/QuestionnaireParagraph/Component";
 import QuestionnaireInfo from "../../../components/QuestionnaireComponents/QuestionnaireInfo/Component";
 import QuestionnaireTextArea from "../../../components/QuestionnaireComponents/QuestionnaireTextArea/Component";
+import QuestionnaireRadio from "../../../components/QuestionnaireComponents/QuestionnaireRadio/Component";
 
 type PropsType = {
     loading: boolean
@@ -31,6 +32,8 @@ function getComponent(componentInfo: ComponentInfoType) {
             return <QuestionnaireInfo {...props}/>
         case "textarea":
             return <QuestionnaireTextArea {...props}/>
+        case "radio":
+            return <QuestionnaireRadio {...props}/>
         default:
             return null
     }
