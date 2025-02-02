@@ -9,7 +9,7 @@ export type QuestionnaireRadioPropsType = {
 }
 
 export const QuestionnaireRadioDefaultProps: QuestionnaireRadioPropsType = {
-    title: 'Please select',
+    title: 'Please select (single)',
     isVertical: false,
     value: '',
     options: [

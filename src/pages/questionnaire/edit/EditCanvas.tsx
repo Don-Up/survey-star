@@ -14,6 +14,7 @@ import QuestionnaireParagraph from "../../../components/QuestionnaireComponents/
 import QuestionnaireInfo from "../../../components/QuestionnaireComponents/QuestionnaireInfo/Component";
 import QuestionnaireTextArea from "../../../components/QuestionnaireComponents/QuestionnaireTextArea/Component";
 import QuestionnaireRadio from "../../../components/QuestionnaireComponents/QuestionnaireRadio/Component";
+import QuestionnaireCheckBox from "../../../components/QuestionnaireComponents/QuestionnaireCheckBox/Component";
 
 type PropsType = {
     loading: boolean
@@ -34,6 +35,8 @@ function getComponent(componentInfo: ComponentInfoType) {
             return <QuestionnaireTextArea {...props}/>
         case "radio":
             return <QuestionnaireRadio {...props}/>
+        case "checkbox":
+            return <QuestionnaireCheckBox {...props}/>
         default:
             return null
     }

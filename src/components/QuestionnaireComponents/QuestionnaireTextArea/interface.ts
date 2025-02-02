@@ -7,6 +7,6 @@ export type QuestionnaireTextAreaPropsType = {
 }
 
 export const QuestionnaireTextAreaDefaultProps: QuestionnaireTextAreaPropsType = {
-    title: "Please enter a title",
+    title: "Please enter a text",
     placeholder: "Please enter the content",
 }
