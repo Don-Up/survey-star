@@ -12,6 +12,7 @@ import {setSelectedId} from "../../../store/selectIdReducer";
 import useBindCanvasKey from "../../../hook/useBindCanvasKey";
 import QuestionnaireParagraph from "../../../components/QuestionnaireComponents/QuestionnaireParagraph/Component";
 import QuestionnaireInfo from "../../../components/QuestionnaireComponents/QuestionnaireInfo/Component";
+import QuestionnaireTextArea from "../../../components/QuestionnaireComponents/QuestionnaireTextArea/Component";
 
 type PropsType = {
     loading: boolean
@@ -28,6 +29,8 @@ function getComponent(componentInfo: ComponentInfoType) {
             return <QuestionnaireParagraph {...props}/>
         case "info":
             return <QuestionnaireInfo {...props}/>
+        case "textarea":
+            return <QuestionnaireTextArea {...props}/>
         default:
             return null
     }
