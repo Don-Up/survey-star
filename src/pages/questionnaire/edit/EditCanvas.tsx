@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../../store";
 import {setSelectedId} from "../../../store/selectIdReducer";
 import useBindCanvasKey from "../../../hook/useBindCanvasKey";
+import QuestionnaireParagraph from "../../../components/QuestionnaireComponents/QuestionnaireParagraph/Component";
 
 type PropsType = {
     loading: boolean
@@ -22,6 +23,8 @@ function getComponent(componentInfo: ComponentInfoType) {
             return <QuestionnaireTitle {...props}/>
         case "input":
             return <QuestionnaireInput {...props}/>
+        case  "paragraph":
+            return <QuestionnaireParagraph {...props}/>
         default:
             return null
     }
@@ -34,7 +37,6 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     const dispatch = useDispatch()
     useEffect(() => {
         if(components.length>0){
-            // 125
             dispatch(setSelectedId(components[0].uuid))
         }
     }, []);

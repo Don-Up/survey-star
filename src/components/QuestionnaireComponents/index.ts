@@ -1,9 +1,10 @@
 import QuestionnaireTitleConf, {QuestionnaireTitlePropsType} from "./QuestionnaireTitle";
 import QuestionnaireInputConf, {QuestionnaireInputPropsType} from "./QuestionnaireInput";
+import QuestionnaireParagraphConf, {QuestionnaireParagraphPropsType} from "./QuestionnaireParagraph";
 import {FC} from "react";
 
 
-export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInputPropsType
+export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInputPropsType & QuestionnaireParagraphPropsType;
 
 export type ComponentConfType = {
     title: string
@@ -16,6 +17,7 @@ export type ComponentConfType = {
 const componentConfList: ComponentConfType[] = [
     QuestionnaireInputConf,
     QuestionnaireTitleConf,
+    QuestionnaireParagraphConf
 ]
 
 export function getComponentConfByType(type: string){
@@ -26,7 +28,7 @@ export const componentConfGroup = [
     {
         groupId: "text",
         groupName: "Text Display",
-        components: [QuestionnaireTitleConf]
+        components: [QuestionnaireTitleConf, QuestionnaireParagraphConf]
     },
     {
         groupId: "input",
