@@ -78,6 +78,17 @@ export const componentsSlice = createSlice({
             if (index >= 0) {
                 draft[index].isLocked = !draft[index].isLocked
             }
+        }),
+        // Change Title
+        changeComponentTitle: produce((draft: ComponentInfoType[], action: PayloadAction<{
+            id: string,
+            title: string
+        }>) => {
+            const {id, title} = action.payload
+            const index = draft.findIndex(item => item.uuid === id)
+            if (index >= 0) {
+                draft[index].title = title
+            }
         })
     }
 })
@@ -88,7 +99,8 @@ export const {
     changeComponentProps,
     removeSelectedComponent,
     changeComponentVisibility,
-    toggleComponentLock
+    toggleComponentLock,
+    changeComponentTitle
 } = componentsSlice.actions
 
 export default componentsSlice.reducer
