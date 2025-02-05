@@ -23,9 +23,13 @@ export const pageInfoSlice = createSlice({
         resetPageInfo: (state, action: PayloadAction<PageInfoType>) => {
             return action.payload
         },
+        // changePageTitle
+        changePageTitle: (state, action: PayloadAction<string>) => {
+            state.title = action.payload
+        },
     },
 })
 
 // Export actions and reducer
-export const {resetPageInfo} = pageInfoSlice.actions
+export const {resetPageInfo, changePageTitle} = pageInfoSlice.actions
 export default pageInfoSlice.reducer
