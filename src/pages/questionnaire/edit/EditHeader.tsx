@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Input, Space, Typography} from "antd";
+import {Button, Input, message, Space, Typography} from "antd";
 import {EditOutlined, LeftOutlined, LoadingOutlined} from "@ant-design/icons";
 import {useNavigate, useParams} from "react-router-dom";
 import EditToolbar from "./EditToolbar";
@@ -77,6 +77,33 @@ const SaveButton: React.FC = () => {
     )
 }
 
+// Publish Button
+const PublishButton: React.FC = () => {
+    const {components = []} = useGetComponentInfo()
+    const pageInfo = useGetPageInfo()
+    const {id} = useParams()
+    const nav = useNavigate()
+
+    const {loading, run: publish} = useRequest(async () => {
+        if (!id) return
+        // map components to remove property "questionnaireId"
+        const newComponents = components.map(({questionnaireId, ...rest}) => rest)
+        const data = {components: newComponents, ...pageInfo, isPublished: true}
+        console.log(id, JSON.stringify(data))
+        await updateQuestionnaireService(id, data)
+    }, {
+        manual: true,
+        onSuccess() {
+            message.success("Questionnaire published successfully")
+            nav(`/questionnaire/stat/${id}`)
+        }
+    })
+
+    return (
+        <Button type="primary" onClick={publish} disabled={loading}>Publish</Button>
+    )
+}
+
 const EditHeader: React.FC = () => {
     const nav = useNavigate()
 
@@ -95,7 +122,7 @@ const EditHeader: React.FC = () => {
                 <div className="flex-1 text-right">
                     <Space>
                         <SaveButton/>
-                        <Button type="primary">Publish</Button>
+                        <PublishButton/>
                     </Space>
                 </div>
             </div>
