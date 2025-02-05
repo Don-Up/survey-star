@@ -4,14 +4,15 @@ import {getQuestionnaireService} from "../services/questionnaire";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {resetComponents} from "../store/componentsReducer";
+import {resetPageInfo} from "../store/pageInfoReducer";
 
 
-function useLoadQuestionnaireData1(){
-    const {id=""} = useParams()
+function useLoadQuestionnaireData1() {
+    const {id = ""} = useParams()
     const dispatch = useDispatch()
 
     const {data, loading, error, run} = useRequest(async (id: string) => {
-        if(!id) throw new Error("id is required")
+        if (!id) throw new Error("id is required")
         const data = await getQuestionnaireService(id)
         console.log("data0", data)
         return data
@@ -20,11 +21,13 @@ function useLoadQuestionnaireData1(){
     })
 
     useEffect(() => {
-        if(!data) return
-        const {title="", components=[]} = data
+        if (!data) return
+        const {title = "", description = "", js = "", css = "", components = []} = data
         // Store the component data in the store
         console.log("data", data)
         dispatch(resetComponents(components))
+        // reset pageInfo
+        dispatch(resetPageInfo({title, description, js, css}))
     }, [data])
 
     useEffect(() => {
