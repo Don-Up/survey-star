@@ -7,7 +7,7 @@ import useGetPageInfo from "../../../hook/useGetPageInfo";
 import {useDispatch} from "react-redux";
 import {changePageTitle} from "../../../store/pageInfoReducer";
 import useGetComponentInfo from "../../../hook/useGetComponentInfo";
-import {useKeyPress, useRequest} from "ahooks";
+import {useDebounceEffect, useKeyPress, useRequest} from "ahooks";
 import {updateQuestionnaireService} from "../../../services/questionnaire";
 
 const {Title} = Typography
@@ -66,6 +66,11 @@ const SaveButton: React.FC = () => {
         event.preventDefault()
         if(!loading) run()
     })
+
+    // Auto save
+    useDebounceEffect(() => {
+    	run()
+    }, [components, pageInfo],{wait: 1000});
 
     return (
         <Button onClick={run} disabled={loading} icon={loading ? <LoadingOutlined/> : null}>Save</Button>
