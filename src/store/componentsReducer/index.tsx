@@ -9,6 +9,7 @@ export type ComponentInfoType = {
     isHidden?: boolean
     isLocked?: boolean
     props: ComponentPropsType
+    questionnaireId?: number
 }
 
 const INIT_STATE: ComponentInfoType[] = []
