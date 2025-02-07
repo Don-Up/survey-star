@@ -1,6 +1,13 @@
 import React from "react";
 import {Button, Space, Tooltip} from "antd";
-import {BlockOutlined, CopyOutlined, DeleteOutlined, EyeInvisibleOutlined, LockOutlined} from "@ant-design/icons";
+import {
+    BlockOutlined,
+    CopyOutlined,
+    DeleteOutlined, DownOutlined,
+    EyeInvisibleOutlined,
+    LockOutlined,
+    UpOutlined
+} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
 import {
     addComponent,
@@ -19,6 +26,11 @@ const EditToolbar: React.FC = () => {
     const dispatch = useDispatch()
     const {selectedId, selectedComponent, components, copiedComponent} = useGetComponentInfo()
     const {isLocked} = (selectedComponent as ComponentInfoType) || {}
+
+    const length = components.length
+    const selectedIndex = components.findIndex(item => item.uuid === selectedId)
+    const isFirst = selectedIndex === 0
+    const isLast = selectedIndex === length - 1
 
     function handleDelete() {
         dispatch(removeSelectedComponent(selectedId))
@@ -58,6 +70,7 @@ const EditToolbar: React.FC = () => {
     }
 
     function selectPrevious() {
+        if(isFirst) return
         const selectIndex = components.findIndex(item => item.uuid === selectedId)
         // If the current index is 0, there is no previous component.
         if (selectIndex <= 0) return
@@ -65,6 +78,7 @@ const EditToolbar: React.FC = () => {
     }
 
     function selectNext() {
+        if(isLast) return
         const selectIndex = components.findIndex(item => item.uuid === selectedId)
         // If the current index is the last index, there is no next component.
         if (selectIndex < 0 || selectIndex >= components.length - 1) return
@@ -91,6 +105,20 @@ const EditToolbar: React.FC = () => {
                 <Button shape={"circle"} icon={<BlockOutlined/>}
                         onClick={handlePaste}
                         disabled={copiedComponent == null}
+                />
+            </Tooltip>
+            <Tooltip title={"MoveUp"}>
+                <Button shape={"circle"}
+                        icon={<UpOutlined/>}
+                        onClick={selectPrevious}
+                        disabled={isFirst}
+                />
+            </Tooltip>
+            <Tooltip title={"MoveDown"}>
+                <Button shape={"circle"}
+                        icon={<DownOutlined/>}
+                        onClick={selectNext}
+                        disabled={isLast}
                 />
             </Tooltip>
         </Space>

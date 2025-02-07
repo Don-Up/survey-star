@@ -11,6 +11,7 @@ function isActiveElementValid(){
     if(activeElement === document.body){
         return true
     }
+    if(activeElement?.matches("div[role='button']")) return true
     return false
 }
 

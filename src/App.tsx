@@ -3,7 +3,7 @@ import 'normalize.css';
 import {useTitle} from "ahooks";
 import {RouterProvider} from "react-router-dom";
 import router from "./router"; // Import normalize.css first
-
+import "./App.css"
 function App() {
     useTitle("questionnaire")
 
