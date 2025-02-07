@@ -90,7 +90,17 @@ export const componentsSlice = createSlice({
             if (index >= 0) {
                 draft[index].title = title
             }
-        })
+        }),
+        // Swap indexes of components
+        swapComponent: produce((draft: ComponentInfoType[], action: PayloadAction<{
+                oldIndex: number,
+                newIndex: number
+            }>) => {
+                const { oldIndex, newIndex } = action.payload as { oldIndex: number, newIndex: number }
+                    // Swap the oldIndex and the newIndex
+                    [draft[oldIndex], draft[newIndex]] = [draft[newIndex], draft[oldIndex]];
+            }
+        )
     }
 })
 
@@ -101,7 +111,8 @@ export const {
     removeSelectedComponent,
     changeComponentVisibility,
     toggleComponentLock,
-    changeComponentTitle
+    changeComponentTitle,
+    swapComponent
 } = componentsSlice.actions
 
 export default componentsSlice.reducer

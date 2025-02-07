@@ -4,7 +4,7 @@ import QuestionnaireInput from "../../../components/QuestionnaireComponents/Ques
 import styles from "./index.module.css"
 import {Spin} from "antd";
 import useGetComponentInfo from "../../../hook/useGetComponentInfo";
-import {ComponentInfoType} from "../../../store/componentsReducer";
+import {ComponentInfoType, swapComponent} from "../../../store/componentsReducer";
 import classNames from 'classnames'
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../../store";
@@ -15,6 +15,8 @@ import QuestionnaireInfo from "../../../components/QuestionnaireComponents/Quest
 import QuestionnaireTextArea from "../../../components/QuestionnaireComponents/QuestionnaireTextArea/Component";
 import QuestionnaireRadio from "../../../components/QuestionnaireComponents/QuestionnaireRadio/Component";
 import QuestionnaireCheckBox from "../../../components/QuestionnaireComponents/QuestionnaireCheckBox/Component";
+import SortableContainer from "../../../components/DragSortable/SortableContainer";
+import SortableItem from "../../../components/DragSortable/SortableItem";
 
 type PropsType = {
     loading: boolean
@@ -68,26 +70,45 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     if (loading) {
         return <div className={"text-center mt-6"}><Spin/></div>
     }
-    return (<div className={"min-h-full bg-white overflow-hidden"}>
-        {components.filter(c => !c.isHidden).map(c => {
-            const {uuid, isLocked} = c
-            const wrapperDefClassName = styles["component-wrapper"]
-            const selectedClassName = styles.selected
-            const lockedClassName = styles.locked
-            const wrapperClassName = classNames({
-                [wrapperDefClassName]: true,
-                [selectedClassName]: selectedId === uuid,
-                [lockedClassName]: isLocked
-            })
-            return <div key={uuid} className={wrapperClassName} onClick={(e) => handleClick(e, uuid)}>
-                <div className={styles["component"]}>
-                    {
-                        getComponent(c)
-                    }
-                </div>
+
+    const componentListWithId = components.map(c => {
+        return {
+            ...c,
+            id: c.uuid,
+        }
+    })
+
+    function handleDragEnd(oldIndex: number, newIndex: number) {
+        dispatch(swapComponent({ oldIndex, newIndex }))
+    }
+
+    return (
+        <SortableContainer items={componentListWithId}
+                           onDragEnd={handleDragEnd}>
+            <div className={"min-h-full bg-white overflow-hidden"}>
+                {components.filter(c => !c.isHidden).map(c => {
+                    const {uuid, isLocked} = c
+                    const wrapperDefClassName = styles["component-wrapper"]
+                    const selectedClassName = styles.selected
+                    const lockedClassName = styles.locked
+                    const wrapperClassName = classNames({
+                        [wrapperDefClassName]: true,
+                        [selectedClassName]: selectedId === uuid,
+                        [lockedClassName]: isLocked
+                    })
+                    return <SortableItem id={uuid} key={uuid}>
+                        <div className={wrapperClassName} onClick={(e) => handleClick(e, uuid)}>
+                            <div className={styles["component"]}>
+                                {
+                                    getComponent(c)
+                                }
+                            </div>
+                        </div>
+                    </SortableItem>
+                })}
             </div>
-        })}
-    </div>)
+        </SortableContainer>
+    )
 }
 
 export default EditCanvas
