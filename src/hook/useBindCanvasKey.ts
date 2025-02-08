@@ -5,6 +5,7 @@ import useGetComponentInfo from "./useGetComponentInfo";
 import {copySelectedComponent} from "../store/copyReducer";
 import {nanoid} from "@reduxjs/toolkit";
 import {setSelectedId} from "../store/selectIdReducer";
+import {ActionCreators as UndoActionCreators} from "redux-undo";
 
 function isActiveElementValid(){
     const activeElement = document.activeElement
@@ -60,6 +61,20 @@ function useBindCanvasKey(){
             if (selectIndex < 0 || selectIndex >= components.length - 1) return
             dispatch(setSelectedId(components[selectIndex + 1].uuid))
         }
+    })
+
+    // undo, ctrl + z, meta + z
+    useKeyPress(["ctrl.z", "meta.z"], () => {
+        if (!isActiveElementValid()) return
+        dispatch(UndoActionCreators.undo())
+    }, {
+        exactMatch: true,
+    })
+
+    // redo, ctrl + shift + z, meta + shift + z
+    useKeyPress(["ctrl.shift.z", "meta.shift.z"], () => {
+        if (!isActiveElementValid()) return
+        dispatch(UndoActionCreators.redo())
     })
 }
 

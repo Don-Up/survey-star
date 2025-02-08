@@ -4,11 +4,11 @@ import componentsReducer, {ComponentInfoType} from "./componentsReducer";
 import selectedIdReducer from "./selectIdReducer";
 import copyReducer from "./copyReducer";
 import pageInfoReducer, {PageInfoType} from "./pageInfoReducer";
-
+import undoable, { excludeAction, StateWithHistory } from 'redux-undo'
 
 export type StateType = {
     user: UserStateType
-    components: ComponentInfoType[]
+    components: StateWithHistory<ComponentInfoType[]>
     selectedId: string | null
     copy: ComponentInfoType | null
     pageInfo: PageInfoType
@@ -17,7 +17,12 @@ export type StateType = {
 export default configureStore({
     reducer: {
         user: userReducer,
-        components: componentsReducer,
+        components: undoable(componentsReducer, {
+           limit: 20,
+           filter: excludeAction([
+               "components/resetComponents"
+           ])
+        }),
         selectedId: selectedIdReducer,
         copy: copyReducer,
         pageInfo: pageInfoReducer,
