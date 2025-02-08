@@ -22,12 +22,12 @@ function useLoadQuestionnaireData1() {
 
     useEffect(() => {
         if (!data) return
-        const {title = "", description = "", js = "", css = "", components = []} = data
+        const {title = "", description = "", js = "", css = "", isPublished = false,  components = []} = data
         // Store the component data in the store
         console.log("data", data)
         dispatch(resetComponents(components))
         // reset pageInfo
-        dispatch(resetPageInfo({title, description, js, css}))
+        dispatch(resetPageInfo({title, description, js, css, isPublished}))
     }, [data])
 
     useEffect(() => {

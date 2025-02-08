@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
 import EditHeader from "./EditHeader";
+import useGetPageInfo from "../../../hook/useGetPageInfo";
+import {useTitle} from "ahooks";
 
 /*
  * @description: Edit Questionnaire Page
@@ -14,6 +16,10 @@ import EditHeader from "./EditHeader";
 export const Edit: React.FC = () => {
     const {loading} = useLoadQuestionnaireData1()
     const dispatch = useDispatch()
+
+    const {title} = useGetPageInfo()
+
+    useTitle(`Questionnaire Edit - ${title}`)
     function handleClearSelectedId() {
         dispatch(clearSelectedId())
     }

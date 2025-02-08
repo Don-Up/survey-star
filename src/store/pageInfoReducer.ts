@@ -5,6 +5,7 @@ export type PageInfoType = {
     description?: string
     js?: string
     css?: string
+    isPublished?: boolean
 }
 
 // Define INIT_STATE
@@ -13,6 +14,7 @@ export const INIT_STATE: PageInfoType = {
     description: "",
     js: "",
     css: "",
+    isPublished: false
 }
 
 // Define pageInfoSlice with createSlice
