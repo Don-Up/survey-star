@@ -4,6 +4,7 @@ import {Button, Result, Spin} from "antd";
 import useGetPageInfo from "../../../hook/useGetPageInfo";
 import {useNavigate} from "react-router-dom";
 import {useTitle} from "ahooks";
+import StatHeader from "./StatHeader";
 
 /*
  * @description: Questionnaire Statistics Page
@@ -47,7 +48,7 @@ const Stat: React.FC = () => {
 
 
     return (<div className={"flex flex-col bg-[#f0f2f5] min-h-screen"}>
-        <div>Header</div>
+        <StatHeader/>
         <div className={"flex-auto py-3"}>
             {loading && loadingElement}
             {!loading && (<div className={"mx-6 flex"}>
