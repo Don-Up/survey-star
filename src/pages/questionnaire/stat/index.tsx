@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import useLoadQuestionnaireData from "../../../hook/useLoadQuestionData";
 import {Button, Result, Spin} from "antd";
 import useGetPageInfo from "../../../hook/useGetPageInfo";
 import {useNavigate} from "react-router-dom";
 import {useTitle} from "ahooks";
 import StatHeader from "./StatHeader";
+import ComponentList from "./ComponentList";
 
 /*
  * @description: Questionnaire Statistics Page
@@ -14,6 +15,9 @@ const Stat: React.FC = () => {
     const {loading} = useLoadQuestionnaireData()
 
     const {title, isPublished} = useGetPageInfo()
+
+    const [selectedComponentId, setSelectedComponentId] = useState("")
+    const [selectedComponentType, setSelectedComponentType] = useState("")
 
     useTitle(`Questionnaire Stat - ${title}`)
 
@@ -39,7 +43,9 @@ const Stat: React.FC = () => {
             </div>
         } else {
             return <>
-                <div className={"w-[350px] mr-6"}>L</div>
+                <div className={"w-[350px] mr-6"}>
+                    <ComponentList selectedComponentId={selectedComponentId} setSelectedComponentId={setSelectedComponentId} setSelectedComponentType={setSelectedComponentType}/>
+                </div>
                 <div className={"flex-auto bg-white py-3 px-5"}>C</div>
                 <div className={"w-[400px] ml-6 bg-white py-3 px-5 overflow-hidden"}>R</div>
             </>
@@ -51,7 +57,7 @@ const Stat: React.FC = () => {
         <StatHeader/>
         <div className={"flex-auto py-3"}>
             {loading && loadingElement}
-            {!loading && (<div className={"mx-6 flex"}>
+            {!loading && (<div className={"mx-6 flex h-[90vh]"}>
                 {getContentElement()}
             </div>)}
         </div>
