@@ -57,7 +57,6 @@ const SaveButton: React.FC = () => {
         const newComponents = components.map(({questionnaireId, ...rest}) => rest)
         const data = {components: newComponents, ...pageInfo}
 
-        console.log(id, JSON.stringify(data))
         await updateQuestionnaireService(id, data)
     }, {manual: true})
 
@@ -89,7 +88,6 @@ const PublishButton: React.FC = () => {
         // map components to remove property "questionnaireId"
         const newComponents = components.map(({questionnaireId, ...rest}) => rest)
         const data = {components: newComponents, ...pageInfo, isPublished: true}
-        console.log(id, JSON.stringify(data))
         await updateQuestionnaireService(id, data)
     }, {
         manual: true,

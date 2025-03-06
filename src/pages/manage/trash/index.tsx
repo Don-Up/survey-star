@@ -75,7 +75,6 @@ const Trash: React.FC = () => {
     ];
 
     function handleRestore() {
-        console.log("selectedRowKeys", selectedRowKeys)
         restoreDeletedQuestionnaireService(selectedRowKeys).then(res => {
             setData((prevData) => prevData?.filter((item) => !selectedRowKeys.includes(item.id)));
         })

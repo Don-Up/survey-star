@@ -15,7 +15,6 @@ const Register: React.FC = () => {
                 name: values.username,
                 password: values.password,
             });
-            console.log(response);
             if (response.success) {
                 message.success(response.message);
                 nav("/login", {replace: true})

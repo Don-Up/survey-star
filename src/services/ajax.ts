@@ -7,7 +7,6 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use(config => {
-    console.log(config.url)
     const token = getToken()
     if (token) {
         config.headers.Authorization = `Bearer ${token}`
@@ -17,7 +16,9 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(res => {
     const resData = (res.data || {}) as ResDataType
-    console.log("resData", resData)
+    const date = new Date()
+    console.info(res.config.url, `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}\n`,
+        resData.errno===0?resData.data:resData.msg)
     const {errno, data = {}, msg = ""} = resData
     if (errno === 0) {
         return data

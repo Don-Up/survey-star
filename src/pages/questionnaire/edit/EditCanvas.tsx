@@ -58,8 +58,6 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     useBindCanvasKey()
 
     function handleClick(event: React.MouseEvent<HTMLDivElement>, id: string) {
-        console.log("id", id)
-
         if (id !== selectedId) {
             event.stopPropagation()
             // 123

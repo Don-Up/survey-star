@@ -8,7 +8,6 @@ export const selectedIdSlice = createSlice({
     initialState: INIT_SELECTED_ID,
     reducers: {
         setSelectedId: (state, action:{payload: any, type: string}) => {
-            console.log("newId", action.payload)
             return action.payload
         },
         clearSelectedId: () => {

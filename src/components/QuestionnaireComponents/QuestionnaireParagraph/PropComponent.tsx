@@ -6,8 +6,6 @@ const {TextArea} = Input
 const PropComponent: React.FC<QuestionnaireParagraphPropsType> = (props) => {
     const {text, isCenter, onChange, disabled} = props
     const [form] = Form.useForm()
-    console.log("props", props.text)
-
     function handleValuesChange() {
         if (onChange) {
             onChange(form.getFieldsValue())

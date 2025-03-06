@@ -3,6 +3,7 @@ import useGetComponentInfo from "../../../hook/useGetComponentInfo";
 import {getComponentConfByType} from "../../../components/QuestionnaireComponents";
 import styles from "./ComponentList.module.css"
 import classNames from "classnames";
+import useLoadQuestionnaireData1 from "../../../hook/useLoadQuestionnaireData";
 
 type PropsType = {
     selectedComponentId: string
@@ -10,6 +11,7 @@ type PropsType = {
     setSelectedComponentType: (type: string) => void
 }
 const ComponentList: React.FC<PropsType> = ({selectedComponentId, setSelectedComponentId, setSelectedComponentType}) => {
+    useLoadQuestionnaireData1()
     const {components} = useGetComponentInfo()
 
     return (<div className={styles.container}>

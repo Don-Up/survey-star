@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {useTitle} from "ahooks";
 import StatHeader from "./StatHeader";
 import ComponentList from "./ComponentList";
+import PageStat from "./PageStat";
 
 /*
  * @description: Questionnaire Statistics Page
@@ -18,8 +19,6 @@ const Stat: React.FC = () => {
 
     const [selectedComponentId, setSelectedComponentId] = useState("")
     const [selectedComponentType, setSelectedComponentType] = useState("")
-
-    useTitle(`Questionnaire Stat - ${title}`)
 
     const nav = useNavigate()
 
@@ -44,9 +43,17 @@ const Stat: React.FC = () => {
         } else {
             return <>
                 <div className={"w-[350px] mr-6"}>
-                    <ComponentList selectedComponentId={selectedComponentId} setSelectedComponentId={setSelectedComponentId} setSelectedComponentType={setSelectedComponentType}/>
+                    <ComponentList
+                        selectedComponentId={selectedComponentId}
+                        setSelectedComponentId={setSelectedComponentId}
+                        setSelectedComponentType={setSelectedComponentType}/>
                 </div>
-                <div className={"flex-auto bg-white py-3 px-5"}>C</div>
+                <div className={"flex-auto bg-white py-3 px-5"}>
+                    <PageStat
+                        selectedComponentId={selectedComponentId}
+                        setSelectedComponentId={setSelectedComponentId}
+                        setSelectedComponentType={setSelectedComponentType}/>
+                </div>
                 <div className={"w-[400px] ml-6 bg-white py-3 px-5 overflow-hidden"}>R</div>
             </>
         }

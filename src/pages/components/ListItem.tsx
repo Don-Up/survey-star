@@ -10,6 +10,8 @@ import {
 } from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import {copyQuestionnaireService, updateQuestionnaireService} from "../../services/questionnaire";
+import {useDispatch} from "react-redux";
+import {setSelectedId} from "../../store/selectIdReducer";
 
 const ListItem: React.FC<{
     survey: any,
@@ -18,12 +20,14 @@ const ListItem: React.FC<{
 }> = ({survey, showConfirmDialog, updateSurveys}) => {
 
     const nav = useNavigate()
+    const dispatch = useDispatch()
 
     function handleEdit(id: number) {
         nav(`/questionnaire/edit/${id}`)
     }
 
     function handleStat(id: number) {
+        dispatch(setSelectedId(id))
         nav(`/questionnaire/stat/${id}`)
     }
 

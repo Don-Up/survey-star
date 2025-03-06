@@ -90,7 +90,6 @@ export const loginService = async (payload: LoginPayload): Promise<LoginResponse
 export const getUserInfoService = async (): Promise<any> => {
   try {
     const response = await instance.get('/api/user/profile');
-    console.log("res", response)
     return response
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
