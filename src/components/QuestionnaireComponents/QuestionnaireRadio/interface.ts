@@ -32,3 +32,7 @@ export type OptionType = {
     text: string
     value: string
 }
+
+export type QuestionnaireRadioStatPropsType = {
+    stat: Array<{name: string; count: number}>
+}

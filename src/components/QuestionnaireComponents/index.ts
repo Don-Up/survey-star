@@ -3,7 +3,10 @@ import QuestionnaireInputConf, {QuestionnaireInputPropsType} from "./Questionnai
 import QuestionnaireParagraphConf, {QuestionnaireParagraphPropsType} from "./QuestionnaireParagraph";
 import QuestionnaireInfoConf, {QuestionnaireInfoPropsType} from "./QuestionnaireInfo";
 import QuestionnaireTextAreaConf, {QuestionnaireTextAreaPropsType} from "./QuestionnaireTextArea";
-import QuestionnaireRadioConf, {QuestionnaireRadioPropsType} from "./QuestionnaireRadio";
+import QuestionnaireRadioConf, {
+    QuestionnaireRadioPropsType,
+    QuestionnaireRadioStatPropsType
+} from "./QuestionnaireRadio";
 import QuestionnaireCheckBoxConf, {QuestionnaireCheckBoxPropsType} from "./QuestionnaireCheckBox";
 import {FC} from "react";
 
@@ -11,12 +14,16 @@ import {FC} from "react";
 export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInputPropsType & QuestionnaireParagraphPropsType
     & QuestionnaireInfoPropsType & QuestionnaireTextAreaPropsType & QuestionnaireRadioPropsType & QuestionnaireCheckBoxPropsType;
 
+// unify each component's stat props type
+type ComponentStatPropsType = QuestionnaireRadioStatPropsType
+
 export type ComponentConfType = {
     title: string
     type: string
     Component: FC<ComponentPropsType>
     PropComponent: FC<ComponentPropsType>
     defaultProps: ComponentPropsType
+    StatComponent?: FC<ComponentStatPropsType>
 }
 
 const componentConfList: ComponentConfType[] = [
