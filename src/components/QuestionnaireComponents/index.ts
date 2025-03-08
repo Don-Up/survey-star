@@ -7,7 +7,10 @@ import QuestionnaireRadioConf, {
     QuestionnaireRadioPropsType,
     QuestionnaireRadioStatPropsType
 } from "./QuestionnaireRadio";
-import QuestionnaireCheckBoxConf, {QuestionnaireCheckBoxPropsType} from "./QuestionnaireCheckBox";
+import QuestionnaireCheckBoxConf, {
+    QuestionnaireCheckBoxPropsType,
+    QuestionnaireCheckBoxStatPropsType
+} from "./QuestionnaireCheckBox";
 import {FC} from "react";
 
 
@@ -15,7 +18,7 @@ export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInpu
     & QuestionnaireInfoPropsType & QuestionnaireTextAreaPropsType & QuestionnaireRadioPropsType & QuestionnaireCheckBoxPropsType;
 
 // unify each component's stat props type
-type ComponentStatPropsType = QuestionnaireRadioStatPropsType
+type ComponentStatPropsType = QuestionnaireRadioStatPropsType & QuestionnaireCheckBoxStatPropsType
 
 export type ComponentConfType = {
     title: string
@@ -57,3 +60,9 @@ export const componentConfGroup = [
         components: [QuestionnaireRadioConf, QuestionnaireCheckBoxConf]
     }
 ]
+
+export const STAT_COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
+
+export function format(n: number) {
+    return (n * 100).toFixed(2)
+}

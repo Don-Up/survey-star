@@ -3,6 +3,7 @@ import {Typography} from "antd";
 import {useRequest} from "ahooks";
 import {getComponentStatService} from "../../../services/stat";
 import {useParams} from "react-router-dom";
+import {getComponentConfByType} from "../../../components/QuestionnaireComponents";
 
 type PropsType = {
     selectedComponentId: string
@@ -34,7 +35,14 @@ const ChartStat: React.FC<PropsType> = ({selectedComponentId, selectedComponentT
     function getStatElem(){
         if(!selectedComponentId) return <div>Please select a component</div>
 
-        return <div>{JSON.stringify(stat)}</div>
+        const { StatComponent } = getComponentConfByType(selectedComponentType) || {}
+
+        // Ensure StatComponent is a valid React component
+        if (StatComponent === null || (typeof StatComponent !== 'function' && typeof StatComponent !== 'object')) {
+            return <div>No Stat Component</div>
+        }
+
+        return <StatComponent stat={stat}/>
     }
 
 

@@ -2,14 +2,9 @@ import React, {useMemo} from "react";
 import {QuestionnaireRadioStatPropsType} from "./interface";
 import {Cell, Pie, PieChart, ResponsiveContainer} from "recharts";
 import {Tooltip} from "antd";
-
-function format(n: number) {
-    return (n * 100).toFixed(2)
-}
+import {format, STAT_COLORS} from "../index";
 
 const StatComponent: React.FC<QuestionnaireRadioStatPropsType> = ({stat = []}) => {
-
-    const STAT_COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
     // sum for count
     const sum = useMemo(() => {

@@ -34,3 +34,7 @@ export const QuestionnaireCheckBoxDefaultProps: QuestionnaireCheckBoxPropsType =
         }
     ],
 }
+
+export type QuestionnaireCheckBoxStatPropsType = {
+    stat: Array<{name: string; count: number}>
+}
