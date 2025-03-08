@@ -7,6 +7,7 @@ import {useTitle} from "ahooks";
 import StatHeader from "./StatHeader";
 import ComponentList from "./ComponentList";
 import PageStat from "./PageStat";
+import ChartStat from "./ChartStat";
 
 /*
  * @description: Questionnaire Statistics Page
@@ -54,7 +55,9 @@ const Stat: React.FC = () => {
                         setSelectedComponentId={setSelectedComponentId}
                         setSelectedComponentType={setSelectedComponentType}/>
                 </div>
-                <div className={"w-[400px] ml-6 bg-white py-3 px-5 overflow-hidden"}>R</div>
+                <div className={"w-[400px] ml-6 bg-white py-3 px-5 overflow-hidden"}>
+                    <ChartStat selectedComponentId={selectedComponentId} selectedComponentType={selectedComponentType}/>
+                </div>
             </>
         }
     }
