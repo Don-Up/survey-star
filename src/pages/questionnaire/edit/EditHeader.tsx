@@ -36,7 +36,7 @@ const TitleElement: React.FC = () => {
 
     return (
         <Space>
-            <Title level={4}>
+            <Title level={4} className={"pt-2"}>
                 {title}
             </Title>
             <Button icon={<EditOutlined/>} type={"text"} onClick={() => setEditState(true)}>
@@ -106,7 +106,7 @@ const EditHeader: React.FC = () => {
     const nav = useNavigate()
 
     return (
-        <div className="bg-white border-b border-solid border-amber-50">
+        <div className="bg-white border-b border-solid border-amber-50 fixed w-full z-10">
             <div className="flex mx-6 h-[50px] items-center">
                 <div className="flex-1">
                     <Space>

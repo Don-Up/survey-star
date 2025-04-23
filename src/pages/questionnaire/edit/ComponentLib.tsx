@@ -44,7 +44,7 @@ const ComponentRenderer: React.FC<{ c: ComponentConfType }> = ({ c }) => {
 
 const ComponentLib: React.FC = () => {
     return (
-        <div>
+        <div className={"overflow-y-auto h-[80vh] thin test"}>
             {componentConfGroup.map((group) => {
                 const { groupId, groupName, components } = group;
                 return (

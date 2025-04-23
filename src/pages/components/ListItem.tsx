@@ -94,7 +94,7 @@ const ListItem: React.FC<{
                         className="text-gray-500"
                         onClick={() => handleEdit(survey.id)}
                     >
-                        编辑问卷
+                        Edit
                     </Button>
                     <Button
                         type="link"
@@ -103,7 +103,7 @@ const ListItem: React.FC<{
                         className="text-gray-500"
                         onClick={() => handleStat(survey.id)}
                     >
-                        问卷统计
+                        Statistics
                     </Button>
                 </div>
 
@@ -131,7 +131,7 @@ const ListItem: React.FC<{
                         size="small"
                         className="text-gray-500"
                     >
-                        复制
+                        Copy
                     </Button>
                     </Popconfirm>
                     <Button
@@ -141,7 +141,7 @@ const ListItem: React.FC<{
                         className="text-gray-500"
                         onClick={() => showConfirmDialog(survey.id)}
                     >
-                        删除
+                        Delete
                     </Button>
                 </div>
             </div>
