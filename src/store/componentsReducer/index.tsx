@@ -2,6 +2,7 @@ import {ComponentPropsType} from "../../components/QuestionnaireComponents";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {produce} from "immer";
 
+
 export type ComponentInfoType = {
     uuid: string
     type: string
@@ -12,13 +13,14 @@ export type ComponentInfoType = {
     questionnaireId?: number
 }
 
+// Initial state: an empty component list
 const INIT_STATE: ComponentInfoType[] = []
 
 export const componentsSlice = createSlice({
     name: 'components',
     initialState: INIT_STATE,
     reducers: {
-        // Reset components
+        // Reset components according to the initial state
         resetComponents: (state: ComponentInfoType[], action: PayloadAction<ComponentInfoType[]>) => {
             return action.payload
         },

@@ -28,8 +28,7 @@ const RightPanel: React.FC = () => {
             key: TAB_KEYS.prop,
             label: (
                 <span>
-                    <FileTextOutlined/>
-                    Properties
+                    <FileTextOutlined/> Properties
                 </span>
             ),
             children: <ComponentProp/>
@@ -38,8 +37,7 @@ const RightPanel: React.FC = () => {
             key: TAB_KEYS.setting,
             label: (
                 <span>
-                    <SettingOutlined/>
-                    Setting
+                    <SettingOutlined/> Setting
                 </span>
             ),
             children: <PageSetting/>

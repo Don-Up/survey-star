@@ -2,8 +2,22 @@ import React, {useMemo} from "react";
 import {QuestionnaireRadioStatPropsType} from "./interface";
 import {Cell, Pie, PieChart, ResponsiveContainer} from "recharts";
 import {Tooltip} from "antd";
-import {format, STAT_COLORS} from "../index";
 
+const STAT_COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
+
+/**
+ * Format the percentage. For example: 0.123456789 => 12.34%
+ * @param n
+ */
+function format(n: number) {
+    return (n * 100).toFixed(2)
+}
+
+/**
+ * Stat component for QuestionnaireRadio
+ * @param stat
+ * @constructor
+ */
 const StatComponent: React.FC<QuestionnaireRadioStatPropsType> = ({stat = []}) => {
 
     // sum for count

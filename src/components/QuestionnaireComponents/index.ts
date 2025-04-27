@@ -13,17 +13,34 @@ import QuestionnaireCheckBoxConf, {
 } from "./QuestionnaireCheckBox";
 import {FC} from "react";
 
-
+/**
+ * Component Props: define properties of each component.
+ * 1. Title
+ * 2. Input
+ * 3. Paragraph
+ * 4. Info
+ * 5. TextArea
+ * 6. Radio
+ * 7. CheckBox
+ */
 export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInputPropsType & QuestionnaireParagraphPropsType
     & QuestionnaireInfoPropsType & QuestionnaireTextAreaPropsType & QuestionnaireRadioPropsType & QuestionnaireCheckBoxPropsType;
 
-// unify each component's stat props type
+/**
+ * Component Static Props
+ */
 type ComponentStatPropsType = QuestionnaireRadioStatPropsType & QuestionnaireCheckBoxStatPropsType
 
+/**
+ * Component Configuration: define each component's configuration.
+ */
 export type ComponentConfType = {
     title: string
+    // Need to be unified with the backend component type
     type: string
+    // Display in the Component Library Tab (Left Panel)
     Component: FC<ComponentPropsType>
+    // Display in the Properties Tab (Right Panel)
     PropComponent: FC<ComponentPropsType>
     defaultProps: ComponentPropsType
     StatComponent?: FC<ComponentStatPropsType>
@@ -43,6 +60,9 @@ export function getComponentConfByType(type: string){
     return componentConfList.find(conf => conf.type === type)
 }
 
+/**
+ * Rendered By Component Library Tab Page
+ */
 export const componentConfGroup = [
     {
         groupId: "text",
@@ -60,9 +80,3 @@ export const componentConfGroup = [
         components: [QuestionnaireRadioConf, QuestionnaireCheckBoxConf]
     }
 ]
-
-export const STAT_COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
-
-export function format(n: number) {
-    return (n * 100).toFixed(2)
-}

@@ -9,14 +9,14 @@ const LeftPanel: React.FC = () => {
         {
             key: 'componentLib',
             label: (
-                <span><AppstoreOutlined/>Component Library</span>
+                <span><AppstoreOutlined/> Component Library</span>
             ),
             children: <ComponentLib/>
         },
         {
             key: 'layers',
             label: (
-                <span><BarsOutlined/>Layers</span>
+                <span><BarsOutlined/> Layers</span>
             ),
             children: <Layers/>
         }

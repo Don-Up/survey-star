@@ -28,14 +28,17 @@ export const Edit: React.FC = () => {
         <EditHeader/>
         <div className={"flex-auto py-3 mt-12"}>
             <div className={"mx-6 flex h-full"}>
-                <div className={"w-[295px] bg-white px-4"}>
+                {/* LEFT */}
+                <div className={"w-[325px] bg-white px-4"}>
                     <LeftPanel/>
                 </div>
+                {/* CENTER */}
                 <div className={"flex-1 relative overflow-hidden"} onClick={handleClearSelectedId}>
                     <div className={"absolute w-[400px] h-[90vh] top-[350px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow-custom thin"}>
                         <EditCanvas loading={loading}/>
                     </div>
                 </div>
+                {/* RIGHT */}
                 <div className={"w-[300px] bg-white px-4"}>
                     <RightPanel/>
                 </div>

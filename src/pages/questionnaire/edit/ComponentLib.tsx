@@ -25,7 +25,6 @@ const ComponentRenderer: React.FC<{ c: ComponentConfType }> = ({ c }) => {
             },
             selectedId,
         }));
-        // 124
         dispatch(setSelectedId(uuid))
     }
 
@@ -42,6 +41,10 @@ const ComponentRenderer: React.FC<{ c: ComponentConfType }> = ({ c }) => {
     );
 };
 
+/**
+ * LEFT Panel → Component Library Tab
+ * @constructor
+ */
 const ComponentLib: React.FC = () => {
     return (
         <div className={"overflow-y-auto h-[80vh] thin test"}>

@@ -4,6 +4,10 @@ import {Form, Input} from "antd";
 import {useDispatch} from "react-redux";
 import {resetPageInfo} from "../../../store/pageInfoReducer";
 
+/**
+ * Edit → Right Panel → Page Setting
+ * @constructor
+ */
 const PageSetting: React.FC = () => {
     const pageInfo = useGetPageInfo()
     // form

@@ -6,19 +6,23 @@ import {useDispatch} from "react-redux";
 import {resetComponents} from "../store/componentsReducer";
 import {resetPageInfo} from "../store/pageInfoReducer";
 
-
+/**
+ * A hook to load the questionnaire data
+ */
 function useLoadQuestionnaireData1() {
+    // Get the id from the url
     const {id = ""} = useParams()
     const dispatch = useDispatch()
 
+    // Load the questionnaire data
     const {data, loading, error, run} = useRequest(async (id: string) => {
         if (!id) throw new Error("id is required")
-        const data = await getQuestionnaireService(id)
-        return data
+        return await getQuestionnaireService(id)
     }, {
         manual: true,
     })
 
+    // Store the component data in the store
     useEffect(() => {
         if (!data) return
         const {title = "", description = "", js = "", css = "", isPublished = false,  components = []} = data
@@ -28,6 +32,7 @@ function useLoadQuestionnaireData1() {
         dispatch(resetPageInfo({title, description, js, css, isPublished}))
     }, [data])
 
+    // Reload the questionnaire data when the id changes
     useEffect(() => {
         run(id)
     }, [id])

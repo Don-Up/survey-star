@@ -7,9 +7,13 @@ import pageInfoReducer, {PageInfoType} from "./pageInfoReducer";
 import undoable, { excludeAction, StateWithHistory } from 'redux-undo'
 
 export type StateType = {
+    // user information
     user: UserStateType
+    // the component list in the questionnaire with a specified id
     components: StateWithHistory<ComponentInfoType[]>
+    // used for retrieving the selected component
     selectedId: string | null
+    // the copied component
     copy: ComponentInfoType | null
     pageInfo: PageInfoType
 }
@@ -24,7 +28,7 @@ export default configureStore({
            ])
         }),
         selectedId: selectedIdReducer,
-        copy: copyReducer,
+        copy: copyReducer, // used for copy operation
         pageInfo: pageInfoReducer,
     },
 });
