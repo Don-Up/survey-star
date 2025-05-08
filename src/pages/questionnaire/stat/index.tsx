@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import useLoadQuestionnaireData from "../../../hook/useLoadQuestionData";
 import {Button, Result, Spin} from "antd";
 import useGetPageInfo from "../../../hook/useGetPageInfo";
@@ -14,10 +14,9 @@ import ChartStat from "./ChartStat";
  * Click on ‘Questionnaire Statistics’ in Questionnaire List's items to jump to this page.
  */
 const Stat: React.FC = () => {
-    const {loading} = useLoadQuestionnaireData()
+    const {loading, data} = useLoadQuestionnaireData()
 
-    const {title, isPublished} = useGetPageInfo()
-
+    // state lifting
     const [selectedComponentId, setSelectedComponentId] = useState("")
     const [selectedComponentType, setSelectedComponentType] = useState("")
 
@@ -28,7 +27,9 @@ const Stat: React.FC = () => {
     </div>
 
     function getContentElement() {
-        if (typeof isPublished === "boolean" && !isPublished) {
+        if (data && !data.isPublished) { // typeof isPublished === "boolean" && !isPublished
+            // Not published, return warning
+            console.log("data", data.isPublished)
             return <div className={"flex items-center justify-center w-full"}>
                 <Result
                     status="warning"
@@ -42,6 +43,10 @@ const Stat: React.FC = () => {
                 />
             </div>
         } else {
+            // Published
+            // 1. ComponentList: Select a component to view statistics
+            // 2. PageStat: View statistics of the selected component
+            // 3. ChartStat: View statistics of the selected component
             return <>
                 <div className={"w-[350px] mr-6"}>
                     <ComponentList

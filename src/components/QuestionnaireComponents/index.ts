@@ -14,7 +14,7 @@ import QuestionnaireCheckBoxConf, {
 import {FC} from "react";
 
 /**
- * Component Props: define properties of each component.
+ * Component Props
  * 1. Title
  * 2. Input
  * 3. Paragraph
@@ -27,12 +27,12 @@ export type ComponentPropsType = QuestionnaireTitlePropsType & QuestionnaireInpu
     & QuestionnaireInfoPropsType & QuestionnaireTextAreaPropsType & QuestionnaireRadioPropsType & QuestionnaireCheckBoxPropsType;
 
 /**
- * Component Static Props
+ * Component Stat Props
  */
 type ComponentStatPropsType = QuestionnaireRadioStatPropsType & QuestionnaireCheckBoxStatPropsType
 
 /**
- * Component Configuration: define each component's configuration.
+ * Component Configuration
  */
 export type ComponentConfType = {
     title: string

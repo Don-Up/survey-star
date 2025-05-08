@@ -24,7 +24,7 @@ export function getNextSelectedId(uuid: string, componentList: ComponentInfoType
     let nextSelectedId = "";
     // Get the length of the component list
     const length = visibleComponents.length
-    // If the list contains only one component, return an empty string
+    // If the list contains only one component, return an empty string since there is no component after deleting
     if(length <= 1){
         return "";
     } else {

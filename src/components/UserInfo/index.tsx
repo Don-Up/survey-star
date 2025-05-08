@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { LOGIN_PATHNAME } from "../../router";
-import { useRequest } from "ahooks";
-import { getUserInfoService } from "../../services/user";
+import {Link, useNavigate} from 'react-router-dom';
+import {LOGIN_PATHNAME} from "../../router";
 import {removeToken} from "../../utils/user-info";
 import {useGetUserInfo} from "../../hook/useGetUserInfo";
 import {useDispatch} from "react-redux";

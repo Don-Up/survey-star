@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy} from "react";
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../layouts/main-layout";
 import Home from "../pages/home";
@@ -10,8 +10,11 @@ import List from "../pages/manage/list";
 import Star from "../pages/manage/star";
 import Trash from "../pages/manage/trash";
 import QuestionnaireLayout from "../layouts/questionnaire-layout";
-import {Edit} from "../pages/questionnaire/edit";
-import Stat from "../pages/questionnaire/stat";
+// import {Edit} from "../pages/questionnaire/edit";
+// import Stat from "../pages/questionnaire/stat";
+
+const Edit = lazy(/*webpackChunkName: "editPage"*/() => import("../pages/questionnaire/edit"))
+const Stat = lazy(/*webpackChunkName: "statPage"*/() => import("../pages/questionnaire/stat"))
 
 const router = createBrowserRouter([
     {

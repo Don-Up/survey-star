@@ -4,6 +4,12 @@ import {Input, Typography} from "antd";
 
 
 const {Paragraph} = Typography
+
+/**
+ * Input component
+ * @param props
+ * @constructor
+ */
 const QuestionnaireInput: React.FC<QuestionnaireInputPropsType> = (props) => {
     const { title, placeholder } = {...QuestionnaireInputDefaultProps, ...props}
     return (<div>

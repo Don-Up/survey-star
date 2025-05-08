@@ -2,9 +2,15 @@ import React, {useEffect} from "react";
 import {QuestionnaireInfoPropsType} from "./interface";
 import {Form, Input} from "antd";
 
+/**
+ * Info component property component containing the title and description of the component
+ * @param props
+ * @constructor
+ */
 const PropComponent: React.FC<QuestionnaireInfoPropsType> = (props) => {
     const { title = "", desc = "", onChange, disabled } = props
     const [form] = Form.useForm()
+
     function handleValuesChange() {
         if(onChange){
             onChange(form.getFieldsValue())

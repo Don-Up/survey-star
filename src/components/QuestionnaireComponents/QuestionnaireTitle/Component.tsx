@@ -3,6 +3,12 @@ import {QuestionnaireTitleDefaultProps, QuestionnaireTitlePropsType} from "./int
 import {Typography} from "antd";
 
 const {Title} = Typography
+
+/**
+ * Title component
+ * @param props
+ * @constructor
+ */
 const QuestionnaireTitle:React.FC<QuestionnaireTitlePropsType> = (props) => {
   const { text, level = 1, isCenter } = {...QuestionnaireTitleDefaultProps, ...props}
 

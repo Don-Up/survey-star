@@ -9,6 +9,13 @@ enum TAB_KEYS  {
     prop = "prop",
     setting = "setting"
 }
+
+/**
+ * RightPanel
+ * 1. ComponentProp: show and tweak the properties of the selected component.
+ * 2. PageSetting: show and tweak the properties of the page.
+ * @constructor
+ */
 const RightPanel: React.FC = () => {
 
     const [activeKey, setActiveKey] = useState(TAB_KEYS.prop)
@@ -17,6 +24,7 @@ const RightPanel: React.FC = () => {
 
     useEffect(() => {
     	if (selectedId) {
+            // show prop tab when selectedId is not null
     		setActiveKey(TAB_KEYS.prop)
     	} else {
     		setActiveKey(TAB_KEYS.setting)

@@ -13,13 +13,17 @@ import {useTitle} from "ahooks";
  * @description: Edit Questionnaire Page
  * Click on ‘Edit Questionnaire’ in Questionnaire List's items to jump to this page.
  */
-export const Edit: React.FC = () => {
+const Edit: React.FC = () => {
     const {loading} = useLoadQuestionnaireData1()
     const dispatch = useDispatch()
 
     const {title} = useGetPageInfo()
 
     useTitle(`Questionnaire Edit - ${title}`)
+
+    /**
+     * Clear the selected component when the user clicks on the canvas.
+     */
     function handleClearSelectedId() {
         dispatch(clearSelectedId())
     }
@@ -34,7 +38,7 @@ export const Edit: React.FC = () => {
                 </div>
                 {/* CENTER */}
                 <div className={"flex-1 relative overflow-hidden"} onClick={handleClearSelectedId}>
-                    <div className={"absolute w-[400px] h-[90vh] top-[350px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow-custom thin"}>
+                    <div className={"absolute w-[400px] h-[90vh] top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow-custom thin"}>
                         <EditCanvas loading={loading}/>
                     </div>
                 </div>
@@ -46,3 +50,5 @@ export const Edit: React.FC = () => {
         </div>
     </div>)
 }
+
+export default Edit

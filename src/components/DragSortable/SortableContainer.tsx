@@ -17,7 +17,11 @@ type PropsType = {
  * @param {(oldIndex: number, newIndex: number) => void} onDragEnd - A callback function called when a drag ends, receives the start and end indices of the drag.
  * @returns {JSX.Element} - Renders the drag-and-drop context and strategy for the items.
  */
-const SortableContainer: React.FC<PropsType> = ({children, items, onDragEnd}) => {
+const SortableContainer: React.FC<PropsType> = ({
+                                                    children,
+                                                    items,
+                                                    onDragEnd}) =>
+{
 
     // Initializes drag-and-drop sensors, including mouse and touch sensors, with mouse sensor settings here.
     const sensors = useSensors(

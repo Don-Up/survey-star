@@ -2,6 +2,11 @@ import React, {useEffect} from "react";
 import {QuestionnaireInputPropsType} from "./interface";
 import {Form, Input} from "antd";
 
+/**
+ * Input property component
+ * @param props
+ * @constructor
+ */
 const PropComponent: React.FC<QuestionnaireInputPropsType>
     = (props) => {
     const {title, placeholder, onChange, disabled} = props

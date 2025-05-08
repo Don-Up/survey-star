@@ -17,6 +17,7 @@ import QuestionnaireRadio from "../../../components/QuestionnaireComponents/Ques
 import QuestionnaireCheckBox from "../../../components/QuestionnaireComponents/QuestionnaireCheckBox/Component";
 import SortableContainer from "../../../components/DragSortable/SortableContainer";
 import SortableItem from "../../../components/DragSortable/SortableItem";
+import {getComponentConfByType} from "../../../components/QuestionnaireComponents";
 
 type PropsType = {
     loading: boolean
@@ -28,24 +29,30 @@ type PropsType = {
  */
 function getComponent(componentInfo: ComponentInfoType) {
     const {type, props} = componentInfo
-    switch (type) {
-        case "title":
-            return <QuestionnaireTitle {...props}/>
-        case "input":
-            return <QuestionnaireInput {...props}/>
-        case  "paragraph":
-            return <QuestionnaireParagraph {...props}/>
-        case "info":
-            return <QuestionnaireInfo {...props}/>
-        case "textarea":
-            return <QuestionnaireTextArea {...props}/>
-        case "radio":
-            return <QuestionnaireRadio {...props}/>
-        case "checkbox":
-            return <QuestionnaireCheckBox {...props}/>
-        default:
-            return null
-    }
+    const componentConf = getComponentConfByType(type)
+    if(!componentConf) return null
+    const { Component } = componentConf
+    return <Component {...props}/>
+
+    // The code's intuitive version is like this:
+    // switch (type) {
+    //     case "title":
+    //         return <QuestionnaireTitle {...props}/>
+    //     case "input":
+    //         return <QuestionnaireInput {...props}/>
+    //     case  "paragraph":
+    //         return <QuestionnaireParagraph {...props}/>
+    //     case "info":
+    //         return <QuestionnaireInfo {...props}/>
+    //     case "textarea":
+    //         return <QuestionnaireTextArea {...props}/>
+    //     case "radio":
+    //         return <QuestionnaireRadio {...props}/>
+    //     case "checkbox":
+    //         return <QuestionnaireCheckBox {...props}/>
+    //     default:
+    //         return null
+    // }
 }
 
 /**
@@ -58,6 +65,7 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
     const {components} = useGetComponentInfo()
     const selectedId = useSelector<StateType>(state => state.selectedId)
     const dispatch = useDispatch()
+
     useEffect(() => {
         if (components.length > 0) {
             // Select the first component by default
@@ -69,6 +77,7 @@ const EditCanvas: React.FC<PropsType> = ({loading}) => {
 
     function handleClick(event: React.MouseEvent<HTMLDivElement>, id: string) {
         if (id !== selectedId) {
+            // Prevent the event from bubbling up to the parent element leading to clear the selection
             event.stopPropagation()
             // Select the component
             dispatch(setSelectedId(id))

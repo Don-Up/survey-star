@@ -54,6 +54,7 @@ const PageStat: React.FC<PropsType> = (props: PropsType) => {
         setSelectedComponentType(type)
     }
 
+
     const columns = components.map(c => {
         const {uuid, title, props = {}, type} = c
         const colTitle = props.title || title
@@ -62,7 +63,9 @@ const PageStat: React.FC<PropsType> = (props: PropsType) => {
             title: (<div
                 className={"cursor-pointer"}
                 onClick={() => handleClickTitle(uuid, type)}>
-                <span className={uuid === selectedComponentId ? "text-blue-500" : ""}>{colTitle}</span>
+                <span className={uuid === selectedComponentId ? "text-blue-500" : ""}>
+                    {colTitle}
+                </span>
             </div>),
             dataIndex: uuid,
         }

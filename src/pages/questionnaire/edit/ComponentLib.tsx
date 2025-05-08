@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { Typography } from "antd";
 import { componentConfGroup, ComponentConfType } from "../../../components/QuestionnaireComponents";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,8 +14,10 @@ const ComponentRenderer: React.FC<{ c: ComponentConfType }> = ({ c }) => {
     const { title, type, Component } = c;
     const dispatch = useDispatch();
     const selectedId = useSelector<StateType>(state => state.selectedId) as string
+
     function handleClick() {
         const uuid = nanoid()
+        // Add component
         dispatch(addComponent({
             component: {
                 uuid,

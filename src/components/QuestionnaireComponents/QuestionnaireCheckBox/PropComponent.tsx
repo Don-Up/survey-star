@@ -6,6 +6,11 @@ import {OptionType} from "../QuestionnaireRadio";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {nanoid} from "@reduxjs/toolkit";
 
+/**
+ * CheckBox Property Component
+ * @param props
+ * @constructor
+ */
 const PropComponent: React.FC<QuestionnaireCheckBoxPropsType> = (props) => {
     const {title, isVertical, list = [], disabled, onChange} = props
     const [form] = useForm()
@@ -14,12 +19,14 @@ const PropComponent: React.FC<QuestionnaireCheckBoxPropsType> = (props) => {
         if(onChange == null) return
         const newValues = form.getFieldsValue() as QuestionnaireCheckBoxPropsType
         if(newValues.list){
+            // Filter out options with empty text
             newValues.list = newValues.list.filter(opt => !(opt.text == null))
         }
 
         const { list = [] } = newValues
         list.forEach((opt: OptionType) => {
             if(!opt.value){
+                // If the value is empty, generate a new value
                 opt.value = nanoid(5)
             }
         })

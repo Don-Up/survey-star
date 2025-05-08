@@ -23,6 +23,10 @@ import {copySelectedComponent} from "../../../store/copyReducer";
 import {nanoid} from "@reduxjs/toolkit";
 import {ActionCreators as UndoActionCreators} from "redux-undo";
 
+/**
+ * Edit Toolbar in EditHeader
+ * @constructor
+ */
 const EditToolbar: React.FC = () => {
     const dispatch = useDispatch()
     const {selectedId, selectedComponent, components, copiedComponent} = useGetComponentInfo()
@@ -33,6 +37,9 @@ const EditToolbar: React.FC = () => {
     const isFirst = selectedIndex === 0
     const isLast = selectedIndex === length - 1
 
+    /**
+     * Delete the selected component and then select the next component if there is one.
+     */
     function handleDelete() {
         dispatch(removeSelectedComponent(selectedId))
         const newSelectedId = getNextSelectedId(selectedId, components)
@@ -42,6 +49,9 @@ const EditToolbar: React.FC = () => {
         }
     }
 
+    /**
+     * Hide the selected component and then select the next component if there is one.
+     */
     function handleHide() {
         dispatch(changeComponentVisibility({id: selectedId, isHidden: true}))
         // todo If you want to display it, do it separately.
@@ -52,16 +62,26 @@ const EditToolbar: React.FC = () => {
         }
     }
 
+    /**
+     * Lock the selected component such that it cannot be edited.
+     */
     function handleLock() {
         dispatch(toggleComponentLock({id: selectedId}))
     }
 
+    /**
+     * Copy the selected component.
+     */
     function handleCopy() {
         dispatch(copySelectedComponent(selectedComponent))
     }
 
+    /**
+     * Paste the copied component after the selected component.
+     */
     function handlePaste() {
         if (copiedComponent != null) {
+            // assign a new id to the copied component
             const newId = nanoid()
             dispatch(addComponent({
                 component: {...copiedComponent, uuid: newId},
@@ -70,6 +90,9 @@ const EditToolbar: React.FC = () => {
         }
     }
 
+    /**
+     * Select the previous component.
+     */
     function selectPrevious() {
         if(isFirst) return
         const selectIndex = components.findIndex(item => item.uuid === selectedId)
@@ -78,6 +101,9 @@ const EditToolbar: React.FC = () => {
         dispatch(setSelectedId(components[selectIndex - 1].uuid))
     }
 
+    /**
+     * Select the next component.
+     */
     function selectNext() {
         if(isLast) return
         const selectIndex = components.findIndex(item => item.uuid === selectedId)

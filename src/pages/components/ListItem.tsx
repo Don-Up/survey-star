@@ -74,7 +74,7 @@ const ListItem: React.FC<{
                         color={survey.isPublished ? "blue" : "default"}
                         className="px-2 py-1 text-sm"
                     >
-                        {survey.isPublished? "已发布" : "未发布"}
+                        {survey.isPublished? "published" : "unpublished"}
                     </Tag>
                     <span className="text-sm text-gray-600">答卷: {survey.answers}</span>
                     <span className="text-sm text-gray-500">{survey.date}</span>

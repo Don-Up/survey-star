@@ -7,29 +7,41 @@ import {nanoid} from "@reduxjs/toolkit";
 import {setSelectedId} from "../store/selectIdReducer";
 import {ActionCreators as UndoActionCreators} from "redux-undo";
 
+/**
+ * Check if the active element is valid.
+ * Avoid deleting components when the user is editing the component like typing in an input.
+ */
 function isActiveElementValid(){
     const activeElement = document.activeElement
     if(activeElement === document.body){
+        // If the active element is the body, it means that the user is not currently editing the component.
         return true
     }
+    // If the active element is a button, it means that the user is currently editing the component.
     if(activeElement?.matches("div[role='button']")) return true
     return false
 }
 
+/**
+ * A hook that binds the keyboard events to the canvas.
+ */
 function useBindCanvasKey(){
     const dispatch = useDispatch()
     const {selectedId, selectedComponent, copiedComponent, components} = useGetComponentInfo()
+
     // delete a component
     useKeyPress(["backspace",  "delete"], () => {
         if(!isActiveElementValid()) return
         dispatch(removeSelectedComponent(selectedId))
     })
 
+    // copy a component
     useKeyPress(["ctrl.c", "meta.c"], () => {
         if (!isActiveElementValid()) return
         dispatch(copySelectedComponent(selectedComponent))
     })
 
+    // paste a component
     useKeyPress(["ctrl.v", "meta.v"], () => {
         if (!isActiveElementValid()) return
         if(copiedComponent != null){
@@ -41,7 +53,7 @@ function useBindCanvasKey(){
         }
     })
 
-    // Select the previous component
+    // select the previous component
     useKeyPress(["uparrow"], () => {
         if (!isActiveElementValid()) return
         if (selectedId !== "") {
@@ -52,7 +64,7 @@ function useBindCanvasKey(){
         }
     })
 
-    // Select the next component
+    // select the next component
     useKeyPress(["downarrow"], () => {
         if (!isActiveElementValid()) return
         if (selectedId !== "") {

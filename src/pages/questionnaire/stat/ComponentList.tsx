@@ -10,6 +10,20 @@ type PropsType = {
     setSelectedComponentId: (id: string) => void
     setSelectedComponentType: (type: string) => void
 }
+
+/**
+ * Renders a list of questionnaire components with selection capability.
+ *
+ * This component fetches and displays all non-hidden components from the questionnaire data.
+ * Each component is rendered using its respective configuration, and clicking on a component
+ * selects it by updating the selected component ID and type via the provided callback functions.
+ *
+ * @param {Object} props - Component properties.
+ * @param {string} props.selectedComponentId - The currently selected component's UUID.
+ * @param {function} props.setSelectedComponentId - Callback to set the selected component's UUID.
+ * @param {function} props.setSelectedComponentType - Callback to set the selected component's type.
+ * @returns {React.ReactNode} The rendered ComponentList UI.
+ */
 const ComponentList: React.FC<PropsType> = ({selectedComponentId, setSelectedComponentId, setSelectedComponentType}) => {
     useLoadQuestionnaireData1()
     const {components} = useGetComponentInfo()

@@ -2,9 +2,15 @@ import React, {useEffect} from "react";
 import {QuestionnaireTitlePropsType} from "./interface";
 import {Button, Checkbox, Form, Input, Select} from "antd";
 
+/**
+ * Title property component
+ * @param props
+ * @constructor
+ */
 const PropComponent: React.FC<QuestionnaireTitlePropsType> = (props) => {
     const {text, level, isCenter, onChange, disabled} = props
     const [form] = Form.useForm()
+
     useEffect(() => {
         form.setFieldsValue({text, level, isCenter})
     }, [text, level, isCenter]);

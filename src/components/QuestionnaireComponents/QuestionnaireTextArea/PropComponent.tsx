@@ -2,6 +2,11 @@ import React, {useEffect} from "react";
 import {QuestionnaireTextAreaPropsType} from "./interface";
 import {Form, Input} from "antd";
 
+/**
+ * TextArea property component
+ * @param props
+ * @constructor
+ */
 const PropComponent: React.FC<QuestionnaireTextAreaPropsType>
     = (props) => {
     const {title, placeholder, onChange, disabled} = props

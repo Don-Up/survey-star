@@ -2,6 +2,11 @@ import React from "react";
 import {QuestionnaireCheckBoxDefaultProps, QuestionnaireCheckBoxPropsType} from "./interface";
 import {Checkbox, Space, Typography} from "antd";
 
+/**
+ * CheckBox Component
+ * @param props
+ * @constructor
+ */
 const QuestionnaireCheckBox: React.FC<QuestionnaireCheckBoxPropsType> = (props) => {
     const {title, isVertical, list = []} = {...QuestionnaireCheckBoxDefaultProps, ...props};
 

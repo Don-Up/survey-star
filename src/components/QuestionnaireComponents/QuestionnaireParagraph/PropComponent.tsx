@@ -3,6 +3,12 @@ import {QuestionnaireParagraphPropsType} from "./interface";
 import {Checkbox, Form, Input} from "antd";
 
 const {TextArea} = Input
+
+/**
+ * Paragraph property component
+ * @param props
+ * @constructor
+ */
 const PropComponent: React.FC<QuestionnaireParagraphPropsType> = (props) => {
     const {text, isCenter, onChange, disabled} = props
     const [form] = Form.useForm()

@@ -14,6 +14,7 @@ export const INIT_STATE: PageInfoType = {
     description: "",
     js: "",
     css: "",
+    isPublished: false,
 }
 
 // Define pageInfoSlice with createSlice

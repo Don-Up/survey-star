@@ -2,6 +2,11 @@ import React from "react";
 import {QuestionnaireRadioDefaultProps, QuestionnaireRadioPropsType} from "./interface";
 import {Radio, Space, Typography} from "antd";
 
+/**
+ * Radio Component
+ * @param props
+ * @constructor
+ */
 const QuestionnaireRadio: React.FC<QuestionnaireRadioPropsType> = (props) => {
     const { title, isVertical, options = [], value } = { ...QuestionnaireRadioDefaultProps, ...props };
 
